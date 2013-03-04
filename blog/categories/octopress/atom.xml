@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Germán Racca Blog]]></title>
-  <link href="http://gracca.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Octopress | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://gracca.github.com/"/>
   <updated>2013-03-04T16:41:50-03:00</updated>
   <id>http://gracca.github.com/</id>
