@@ -4,7 +4,7 @@
   <title><![CDATA[Germán Racca Blog]]></title>
   <link href="http://gracca.github.com/atom.xml" rel="self"/>
   <link href="http://gracca.github.com/"/>
-  <updated>2013-03-04T16:41:50-03:00</updated>
+  <updated>2013-03-05T09:44:23-03:00</updated>
   <id>http://gracca.github.com/</id>
   <author>
     <name><![CDATA[Germán Racca]]></name>
@@ -18,9 +18,12 @@
     <link href="http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/"/>
     <updated>2013-03-04T14:39:00-03:00</updated>
     <id>http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress</id>
-    <content type="html"><![CDATA[<p><img style="float:left;margin:0 20px 10px 0" src="images/octopress_github.png" /></p>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.com/images/octopress_github.png" title="Github + Octopress" alt="Github + Octopress"></p>
 
 <p>Estoy inaugurando mi blog en <a href="http://github.com">Github</a> usando <a href="http://octopress.org">Octopress</a>. Más adelante voy a migrar los contenidos del viejo blog en <a href="http://gracca.wordpress.com">WordPress</a>.</p>
+
+<!-- more --->
+
 
 <p>Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los
 diferentes plugins, así que el primer post de verdad va a demorar un poco.</p>

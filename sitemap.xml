@@ -4,18 +4,22 @@
         <loc>
             http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/
         </loc>
-        <lastmod>2013-03-04T16:41:29-03:00</lastmod>
+        <lastmod>2013-03-05T09:42:22-03:00</lastmod>
     </url>
     <url>
         <loc>http://gracca.github.com/blog/archives/</loc>
-        <lastmod>2013-03-04T16:41:29-03:00</lastmod>
+        <lastmod>2013-03-05T09:42:22-03:00</lastmod>
     </url>
     <url>
         <loc>http://gracca.github.com/</loc>
-        <lastmod>2013-03-04T16:41:29-03:00</lastmod>
+        <lastmod>2013-03-05T09:42:22-03:00</lastmod>
     </url>
     <url>
         <loc>http://gracca.github.com/robots.txt</loc>
         <lastmod>2013-03-04T12:53:32-03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://gracca.github.com/about/</loc>
+        <lastmod>2013-03-04T18:08:01-03:00</lastmod>
     </url>
 </urlset>
