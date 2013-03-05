@@ -6,9 +6,11 @@ comments: true
 categories: [Github, Octopress] 
 ---
 
-<img style="float:left;margin:0 20px 10px 0" src="images/octopress_github.png" />
+{% img left /images/octopress_github.png 'Github + Octopress' 'Github + Octopress' %}
 
 Estoy inaugurando mi blog en [Github](http://github.com) usando [Octopress](http://octopress.org). Más adelante voy a migrar los contenidos del viejo blog en [WordPress](http://gracca.wordpress.com).
+
+<!-- more --->
 
 Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los
 diferentes plugins, así que el primer post de verdad va a demorar un poco.
