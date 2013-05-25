@@ -3,7 +3,7 @@ layout: post
 title: "Tamaño de un repositorio de Fedora | Size of a Fedora repository"
 date: 2013-05-24 22:09
 comments: true
-categories: [Fedora, repositorio, repo]
+categories: [fedora, repositorio, repoquery, awk]
 ---
 
 Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio `/etc/yum.repos.d/fedora.repo`, utilizamos el siguiente comando:

@@ -3,7 +3,7 @@ layout: post
 title: "Blog en Github con Octopress"
 date: 2013-03-04 14:39
 comments: true
-categories: [Github, Octopress] 
+categories: [github, octopress] 
 ---
 
 {% img left /images/octopress_github.png 'Github + Octopress' 'Github + Octopress' %}
