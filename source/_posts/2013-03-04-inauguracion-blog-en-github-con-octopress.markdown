@@ -10,7 +10,7 @@ categories: [github, octopress]
 
 Estoy inaugurando mi blog en [Github](http://github.com) usando [Octopress](http://octopress.org). Más adelante voy a migrar los contenidos del viejo blog en [WordPress](http://gracca.wordpress.com).
 
-<!-- more --->
+<!-- more -->
 
 Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los
 diferentes plugins, así que el primer post de verdad va a demorar un poco.

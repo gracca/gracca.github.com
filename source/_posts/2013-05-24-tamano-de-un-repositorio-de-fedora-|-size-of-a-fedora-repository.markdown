@@ -13,7 +13,7 @@ Para saber el tamaño total de algún repositorio que tengamos configurado en Fe
 
 Ese es el resultado que obtengo en mi caso usando Fedora 18. Podemos hacerlo con cualquier repositorio que aparezca en `/etc/yum.repos.d/`. Inclusive podemos poner más de uno, por ejemplo usando `--enablerepo=fedora,updates` sabremos el tamaño total de los repositorios `/etc/yum.repos.d/fedora.repo` y `/etc/yum.repos.d/fedora-updates.repo`
 
-<!-- more --->
+<!-- more -->
 
 El comando [repoquery](http://linux.die.net/man/1/repoquery) (perteneciente al paquete `yum-utils`), junto con las opciones que le pusimos, nos lista los tamaños de todos los paquetes que contiene.
 
