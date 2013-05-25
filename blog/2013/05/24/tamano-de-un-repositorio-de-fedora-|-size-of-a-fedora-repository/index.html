@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Germán Racca Blog</title>
+  <title>Tamaño de un repositorio de Fedora | Size of a Fedora repository - Germán Racca Blog</title>
   <meta name="author" content="Germán Racca">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gracca.github.com/">
+  <link rel="canonical" href="http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a></h1>
+      <h1 class="entry-title">Tamaño de un repositorio de Fedora | Size of a Fedora repository</h1>
     
     
       <p class="meta">
@@ -94,7 +91,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
+<div class="entry-content"><p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
 
 <pre><code>$ repoquery --disablerepo=\* --enablerepo=fedora -qa --qf='%{SIZE}' | awk '{sum+=$1} END{printf("Total size: %d MB\n", sum/1024/1024)}'
   Total size: 33910 MB
@@ -109,22 +106,16 @@
 
 <p>El comando <a href="http://linux.die.net/man/1/awk">awk</a> en este caso va sumando todas las líneas, hasta que presentamos el valor final en megabytes (por eso la doble división al final).</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/">Blog en Github con Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Germán Racca</span></span>
+
+      
 
 
 
@@ -136,41 +127,46 @@
   
 
 
-<time datetime="2013-03-04T14:39:00-03:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-05-24T22:09:00-03:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fedora/'>Fedora</a>, <a class='category' href='/blog/categories/repo/'>repo</a>, <a class='category' href='/blog/categories/repositorio/'>repositorio</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/octopress_github.png" title="Github + Octopress" alt="Github + Octopress"></p>
-
-<p>Estoy inaugurando mi blog en <a href="http://github.com">Github</a> usando <a href="http://octopress.org">Octopress</a>. Más adelante voy a migrar los contenidos del viejo blog en <a href="http://gracca.wordpress.com">WordPress</a>.</p>
-
-<!-- more --->
-
-
-<p>Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los
-diferentes plugins, así que el primer post de verdad va a demorar un poco.</p>
-
-<p>Es una delicia poder editar los posts con <a href="http://vim.org">Vim</a>, y además utilizar la
-sintaxis de <a href="http://daringfireball.net/">Markdown</a> que es muy simple.</p>
-
-<p>Con el pasar del tiempo iré poniendo cosas relacionadas a
-<a href="http://fedoraproject.org">Fedora</a>, <a href="http://es.wikipedia.org/wiki/Astrof%C3%ADsica">Astrofísica</a>, programación, comandos útiles, breves tutoriales, etc.</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/" data-via="" data-counturl="http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/" title="Previous Post: Blog en Github con Octopress">&laquo; Blog en Github con Octopress</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -198,6 +194,7 @@ sintaxis de <a href="http://daringfireball.net/">Markdown</a> que es muy simple.
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -212,7 +209,10 @@ sintaxis de <a href="http://daringfireball.net/">Markdown</a> que es muy simple.
       var disqus_shortname = 'germanracca';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/';
+        var disqus_url = 'http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

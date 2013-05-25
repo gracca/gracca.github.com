@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Germán Racca Blog]]></title>
-  <link href="http://gracca.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Fedora | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.com/blog/categories/fedora/atom.xml" rel="self"/>
   <link href="http://gracca.github.com/"/>
   <updated>2013-05-24T22:44:57-03:00</updated>
   <id>http://gracca.github.com/</id>
@@ -32,29 +32,6 @@
 <p>El comando <a href="http://linux.die.net/man/1/repoquery">repoquery</a> (perteneciente al paquete <code>yum-utils</code>), junto con las opciones que le pusimos, nos lista los tamaños de todos los paquetes que contiene.</p>
 
 <p>El comando <a href="http://linux.die.net/man/1/awk">awk</a> en este caso va sumando todas las líneas, hasta que presentamos el valor final en megabytes (por eso la doble división al final).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Blog en Github con Octopress]]></title>
-    <link href="http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/"/>
-    <updated>2013-03-04T14:39:00-03:00</updated>
-    <id>http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.com/images/octopress_github.png" title="Github + Octopress" alt="Github + Octopress"></p>
-
-<p>Estoy inaugurando mi blog en <a href="http://github.com">Github</a> usando <a href="http://octopress.org">Octopress</a>. Más adelante voy a migrar los contenidos del viejo blog en <a href="http://gracca.wordpress.com">WordPress</a>.</p>
-
-<!-- more --->
-
-
-<p>Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los
-diferentes plugins, así que el primer post de verdad va a demorar un poco.</p>
-
-<p>Es una delicia poder editar los posts con <a href="http://vim.org">Vim</a>, y además utilizar la
-sintaxis de <a href="http://daringfireball.net/">Markdown</a> que es muy simple.</p>
-
-<p>Con el pasar del tiempo iré poniendo cosas relacionadas a
-<a href="http://fedoraproject.org">Fedora</a>, <a href="http://es.wikipedia.org/wiki/Astrof%C3%ADsica">Astrofísica</a>, programación, comandos útiles, breves tutoriales, etc.</p>
 ]]></content>
   </entry>
   

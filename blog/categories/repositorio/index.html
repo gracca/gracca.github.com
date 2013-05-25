@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Germán Racca Blog</title>
+  <title>Category: repositorio - Germán Racca Blog</title>
   <meta name="author" content="Germán Racca">
 
   
-  <meta name="description" content="Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio /etc/yum.repos.d/fedora.repo, utilizamos &hellip;">
+  <meta name="description" content="Category: repositorio">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gracca.github.com/">
+  <link rel="canonical" href="http://gracca.github.com/blog/categories/repositorio/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,114 +63,40 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article role="article">
   
-  
-  
-    <article>
-      
   <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-24T22:09:00-03:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: repositorio</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-  <div class="entry-content"><p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
 
-<pre><code>$ repoquery --disablerepo=\* --enablerepo=fedora -qa --qf='%{SIZE}' | awk '{sum+=$1} END{printf("Total size: %d MB\n", sum/1024/1024)}'
-  Total size: 33910 MB
-</code></pre>
+  
+  <h2>2013</h2>
 
-<p>Ese es el resultado que obtengo en mi caso usando Fedora 18. Podemos hacerlo con cualquier repositorio que aparezca en <code>/etc/yum.repos.d/</code>. Inclusive podemos poner más de uno, por ejemplo usando <code>--enablerepo=fedora,updates</code> sabremos el tamaño total de los repositorios <code>/etc/yum.repos.d/fedora.repo</code> y <code>/etc/yum.repos.d/fedora-updates.repo</code></p>
+<article>
+  
+<h1><a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a></h1>
+<time datetime="2013-05-24T22:09:00-03:00" pubdate><span class='month'>May</span> <span class='day'>24</span> <span class='year'>2013</span></time>
 
-<!-- more --->
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/fedora/'>Fedora</a>, <a class='category' href='/blog/categories/repo/'>repo</a>, <a class='category' href='/blog/categories/repositorio/'>repositorio</a></span>
+</footer>
 
 
-<p>El comando <a href="http://linux.die.net/man/1/repoquery">repoquery</a> (perteneciente al paquete <code>yum-utils</code>), junto con las opciones que le pusimos, nos lista los tamaños de todos los paquetes que contiene.</p>
+</article>
 
-<p>El comando <a href="http://linux.die.net/man/1/awk">awk</a> en este caso va sumando todas las líneas, hasta que presentamos el valor final en megabytes (por eso la doble división al final).</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/">Blog en Github con Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
 
   
+</article>
 
-
-<time datetime="2013-03-04T14:39:00-03:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/octopress_github.png" title="Github + Octopress" alt="Github + Octopress"></p>
-
-<p>Estoy inaugurando mi blog en <a href="http://github.com">Github</a> usando <a href="http://octopress.org">Octopress</a>. Más adelante voy a migrar los contenidos del viejo blog en <a href="http://gracca.wordpress.com">WordPress</a>.</p>
-
-<!-- more --->
-
-
-<p>Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los
-diferentes plugins, así que el primer post de verdad va a demorar un poco.</p>
-
-<p>Es una delicia poder editar los posts con <a href="http://vim.org">Vim</a>, y además utilizar la
-sintaxis de <a href="http://daringfireball.net/">Markdown</a> que es muy simple.</p>
-
-<p>Con el pasar del tiempo iré poniendo cosas relacionadas a
-<a href="http://fedoraproject.org">Fedora</a>, <a href="http://es.wikipedia.org/wiki/Astrof%C3%ADsica">Astrofísica</a>, programación, comandos útiles, breves tutoriales, etc.</p>
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -197,6 +123,7 @@ sintaxis de <a href="http://daringfireball.net/">Markdown</a> que es muy simple.
 
   
 </aside>
+
 
     </div>
   </div>
