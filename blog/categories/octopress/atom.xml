@@ -4,10 +4,10 @@
   <title><![CDATA[Category: octopress | Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-05-25T01:33:08-03:00</updated>
+  <updated>2013-05-25T04:51:52-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
-    <name><![CDATA[Germán Racca]]></name>
+    <name><![CDATA[Germán A. Racca]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -22,7 +22,7 @@
 
 <p>Estoy inaugurando mi blog en <a href="http://github.com">Github</a> usando <a href="http://octopress.org">Octopress</a>. Más adelante voy a migrar los contenidos del viejo blog en <a href="http://gracca.wordpress.com">WordPress</a>.</p>
 
-<!-- more --->
+<!-- more -->
 
 
 <p>Por ahora voy a seguir aprendiendo a configurar Octopress, y a usar los

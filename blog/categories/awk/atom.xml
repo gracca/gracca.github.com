@@ -4,10 +4,10 @@
   <title><![CDATA[Category: awk | Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/blog/categories/awk/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-05-25T01:33:08-03:00</updated>
+  <updated>2013-05-25T04:51:52-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
-    <name><![CDATA[Germán Racca]]></name>
+    <name><![CDATA[Germán A. Racca]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -26,7 +26,7 @@
 
 <p>Ese es el resultado que obtengo en mi caso usando Fedora 18. Podemos hacerlo con cualquier repositorio que aparezca en <code>/etc/yum.repos.d/</code>. Inclusive podemos poner más de uno, por ejemplo usando <code>--enablerepo=fedora,updates</code> sabremos el tamaño total de los repositorios <code>/etc/yum.repos.d/fedora.repo</code> y <code>/etc/yum.repos.d/fedora-updates.repo</code></p>
 
-<!-- more --->
+<!-- more -->
 
 
 <p>El comando <a href="http://linux.die.net/man/1/repoquery">repoquery</a> (perteneciente al paquete <code>yum-utils</code>), junto con las opciones que le pusimos, nos lista los tamaños de todos los paquetes que contiene.</p>
