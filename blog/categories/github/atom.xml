@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: github | Germán Racca Blog]]></title>
-  <link href="http://gracca.github.com/blog/categories/github/atom.xml" rel="self"/>
-  <link href="http://gracca.github.com/"/>
-  <updated>2013-05-24T23:00:02-03:00</updated>
-  <id>http://gracca.github.com/</id>
+  <link href="http://gracca.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2013-05-25T01:33:08-03:00</updated>
+  <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán Racca]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blog en Github con Octopress]]></title>
-    <link href="http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/"/>
+    <link href="http://gracca.github.io/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/"/>
     <updated>2013-03-04T14:39:00-03:00</updated>
-    <id>http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress</id>
+    <id>http://gracca.github.io/blog/2013/03/04/inauguracion-blog-en-github-con-octopress</id>
     <content type="html"><![CDATA[<p><img class="left" src="/images/octopress_github.png" title="Github + Octopress" alt="Github + Octopress"></p>
 
 <p>Estoy inaugurando mi blog en <a href="http://github.com">Github</a> usando <a href="http://octopress.org">Octopress</a>. Más adelante voy a migrar los contenidos del viejo blog en <a href="http://gracca.wordpress.com">WordPress</a>.</p>

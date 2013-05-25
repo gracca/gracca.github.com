@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: fedora | Germán Racca Blog]]></title>
-  <link href="http://gracca.github.com/blog/categories/fedora/atom.xml" rel="self"/>
-  <link href="http://gracca.github.com/"/>
-  <updated>2013-05-24T23:00:02-03:00</updated>
-  <id>http://gracca.github.com/</id>
+  <link href="http://gracca.github.io/blog/categories/fedora/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2013-05-25T01:33:08-03:00</updated>
+  <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán Racca]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tamaño de un repositorio de Fedora | Size of a Fedora repository]]></title>
-    <link href="http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/"/>
+    <link href="http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/"/>
     <updated>2013-05-24T22:09:00-03:00</updated>
-    <id>http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-|-size-of-a-fedora-repository</id>
+    <id>http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-|-size-of-a-fedora-repository</id>
     <content type="html"><![CDATA[<p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
 
 <pre><code>$ repoquery --disablerepo=\* --enablerepo=fedora -qa --qf='%{SIZE}' | awk '{sum+=$1} END{printf("Total size: %d MB\n", sum/1024/1024)}'

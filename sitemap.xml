@@ -2,30 +2,30 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>
-            http://gracca.github.com/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/
+            http://gracca.github.io/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/
         </loc>
         <lastmod>2013-05-24T22:59:47-03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://gracca.github.com/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/
+            http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/
         </loc>
         <lastmod>2013-05-24T22:59:28-03:00</lastmod>
     </url>
     <url>
-        <loc>http://gracca.github.com/blog/archives/</loc>
+        <loc>http://gracca.github.io/blog/archives/</loc>
         <lastmod>2013-05-24T22:59:47-03:00</lastmod>
     </url>
     <url>
-        <loc>http://gracca.github.com/</loc>
+        <loc>http://gracca.github.io/</loc>
         <lastmod>2013-05-24T22:59:47-03:00</lastmod>
     </url>
     <url>
-        <loc>http://gracca.github.com/robots.txt</loc>
+        <loc>http://gracca.github.io/robots.txt</loc>
         <lastmod>2013-03-04T12:53:32-03:00</lastmod>
     </url>
     <url>
-        <loc>http://gracca.github.com/about/</loc>
+        <loc>http://gracca.github.io/about/</loc>
         <lastmod>2013-03-07T00:36:30-03:00</lastmod>
     </url>
 </urlset>
