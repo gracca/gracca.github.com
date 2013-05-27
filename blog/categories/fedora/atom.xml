@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fedora | Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/blog/categories/fedora/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-05-26T13:12:55-03:00</updated>
+  <updated>2013-05-27T01:52:37-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PekWM: updated to new version]]></title>
+    <link href="http://gracca.github.io/blog/2013/05/27/pekwm-updated-to-new-version/"/>
+    <updated>2013-05-27T01:27:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/05/27/pekwm-updated-to-new-version</id>
+    <content type="html"><![CDATA[<p>I have updated <a href="http://www.pekwm.org">pekwm</a> (a small and flexible window manager) to the latest version 0.1.17 for Fedora 19, 18, 17 and rawhide.</p>
+
+<p>For more informations, take e look here:</p>
+
+<p><a href="https://admin.fedoraproject.org/pkgdb/acls/name/pekwm">https://admin.fedoraproject.org/pkgdb/acls/name/pekwm</a></p>
+
+<!-- more -->
+
+
+<p>The following screenshot shows pekwm 0.1.17 running under a <a href="http://wiki.qemu.org/KVM">qemu-kvm</a> virtual machine on a Fedora 19 Beta host:</p>
+
+<p><img class="center" src="/images/pekwm-0.1.17.png" title="Fedora 19 Beta + PekWM 0.1.17" alt="Fedora 19 Beta + PekWM 0.1.17"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tamaño de un repositorio de Fedora | Size of a Fedora repository]]></title>
