@@ -4,7 +4,7 @@
   <title><![CDATA[Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-05-27T02:17:07-03:00</updated>
+  <updated>2013-05-27T02:26:10-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -27,7 +27,7 @@
 <!-- more -->
 
 
-<p>The following screenshot shows PekWM 0.1.17 running under a <a href="http://wiki.qemu.org/KVM">qemu-kvm</a> virtual machine on a Fedora 19 Beta host (click to enlarge):</p>
+<p>The following screenshot shows PekWM 0.1.17 running under a <a href="http://wiki.qemu.org/KVM">qemu-kvm</a> virtual machine with Fedora 19 Beta (click to enlarge):</p>
 
 <p><a href="http://gracca.github.io/images/pekwm-0.1.17.png"><img class="center" src="http://gracca.github.io/images/pekwm-0.1.17.png" width="956" height="537" title="Fedora 19 Beta + PekWM 0.1.17"></a></p>
 ]]></content>
