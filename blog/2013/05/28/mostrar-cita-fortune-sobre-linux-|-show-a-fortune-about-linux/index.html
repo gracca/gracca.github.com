@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: repositorio - Germán Racca Blog</title>
+  <title>Mostrar cita (fortune) sobre Linux | Show a fortune about Linux - Germán Racca Blog</title>
   <meta name="author" content="Germán A. Racca">
 
   
-  <meta name="description" content="Category: repositorio">
+  <meta name="description" content="Para que se nos muestre una cita (fortune) cada vez que abrimos un terminal, basta instalar los siguientes programas en Fedora: $ sudo yum install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gracca.github.io/blog/categories/repositorio/">
+  <link rel="canonical" href="http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,36 +64,111 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: repositorio</h1>
+    
+      <h1 class="entry-title">Mostrar cita (fortune) sobre Linux | Show a fortune about Linux</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-28T04:43:00-03:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Para que se nos muestre una cita (<a href="http://linux.die.net/man/6/fortune">fortune</a>) cada vez que abrimos un terminal, basta instalar los siguientes programas en Fedora:</p>
 
-  
-  <h2>2013</h2>
+<pre><code>$ sudo yum install cowsay fortune-mod
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a></h1>
-<time datetime="2013-05-24T22:09:00-03:00" pubdate><span class='month'>May</span> <span class='day'>24</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/awk/'>awk</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/repoquery/'>repoquery</a>, <a class='category' href='/blog/categories/repositorio/'>repositorio</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<p>Para que la cita sea sobre Linux y además sea dicha por <a href="http://es.wikipedia.org/wiki/Tux">Tux</a>, hacemos lo siguiente:</p>
 
+<pre><code>$ cd ~
+$ echo "fortune linux | cowsay -f tux" &gt;&gt; .bashrc
+</code></pre>
+
+<p>Luego abrimos un nuevo terminal y aparecerá algo como esto:</p>
+
+<p><img class="center" src="/images/fortune-linux.png" title="Cita (fortune)" ></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Escrito por <span class="fn">Germán A. Racca</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-28T04:43:00-03:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bashrc/'>bashrc</a>, <a class='category' href='/blog/categories/cita-/'>cita,</a>, <a class='category' href='/blog/categories/fedora-/'>fedora,</a>, <a class='category' href='/blog/categories/fortune-/'>fortune,</a>, <a class='category' href='/blog/categories/linux-/'>linux,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/" data-via="" data-counturl="http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/" title="Previous Post: Dimensión de las imágenes | Image dimensions">&laquo; Dimensión de las imágenes | Image dimensions</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -185,7 +260,10 @@
       var disqus_shortname = 'germanracca';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/';
+        var disqus_url = 'http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fortune, | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/fortune-/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2013-05-28T04:58:29-03:00</updated>
+  <id>http://gracca.github.io/</id>
+  <author>
+    <name><![CDATA[Germán A. Racca]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mostrar cita (fortune) sobre Linux | Show a fortune about Linux]]></title>
+    <link href="http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/"/>
+    <updated>2013-05-28T04:43:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-|-show-a-fortune-about-linux</id>
+    <content type="html"><![CDATA[<p>Para que se nos muestre una cita (<a href="http://linux.die.net/man/6/fortune">fortune</a>) cada vez que abrimos un terminal, basta instalar los siguientes programas en Fedora:</p>
+
+<pre><code>$ sudo yum install cowsay fortune-mod
+</code></pre>
+
+<!-- more -->
+
+
+<p>Para que la cita sea sobre Linux y además sea dicha por <a href="http://es.wikipedia.org/wiki/Tux">Tux</a>, hacemos lo siguiente:</p>
+
+<pre><code>$ cd ~
+$ echo "fortune linux | cowsay -f tux" &gt;&gt; .bashrc
+</code></pre>
+
+<p>Luego abrimos un nuevo terminal y aparecerá algo como esto:</p>
+
+<p><img class="center" src="http://gracca.github.io/images/fortune-linux.png" title="Cita (fortune)" ></p>
+]]></content>
+  </entry>
+  
+</feed>
