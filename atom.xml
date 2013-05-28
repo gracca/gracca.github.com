@@ -4,7 +4,7 @@
   <title><![CDATA[Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-05-27T23:24:18-03:00</updated>
+  <updated>2013-05-27T23:25:31-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/resize-icon.png" ></p>
 
 <p>La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría la imagen con algún programa e intentaba redimensionar manteniendo las proporciones, después copiaba el nuevo tamaño y listo.</p>
+
+<!-- more -->
+
 
 <p>Para no tener que hacer todo eso cada vez que voy a poner una imagen en el blog, escribí el siguiente script de bash, el cual es muy simple y necesita de <a href="http://www.imagemagick.org">ImageMagick</a> instalado en el sistema para que funcione:</p>
 
