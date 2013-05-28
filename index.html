@@ -9,7 +9,7 @@
   <meta name="author" content="Germán A. Racca">
 
   
-  <meta name="description" content="I have updated PekWM (a small and flexible window manager) to the latest version 0.1.17 for Fedora 19, 18, 17 and rawhide. For more informations, &hellip;">
+  <meta name="description" content="La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/">Dimensión de las imágenes | Image dimensions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-27T22:26:00-03:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/resize-icon.png" ></p>
+
+<p>La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría la imagen con algún programa e intentaba redimensionar manteniendo las proporciones, después copiaba el nuevo tamaño y listo.</p>
+
+<p>Para no tener que hacer todo eso cada vez que voy a poner una imagen en el blog, escribí el siguiente script de bash, el cual es muy simple y necesita de <a href="http://www.imagemagick.org">ImageMagick</a> instalado en el sistema para que funcione:</p>
+
+<figure class='code'><figcaption><span>imgdim  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Author: Germán A. Racca (skytux)</span>
+</span><span class='line'><span class="c"># E-Mail: &lt;gracca[AT]gmail[DOT]com&gt;</span>
+</span><span class='line'><span class="c"># License: GPLv3+</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">IMAGE</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">RATIO</span><span class="o">=</span><span class="nv">$2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">OUT</span><span class="o">=</span><span class="k">$(</span>identify -format <span class="s2">&quot;%[fx:w*($RATIO/100)] %[fx:h*($RATIO/100)]&quot;</span> <span class="nv">$IMAGE</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;$IMAGE: \033[1mwidth\033[0m and \033[1mheight\033[0m at \033[1m$RATIO%\033[0m -&gt; \033[1m$OUT\033[0m&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>El script mantiene las proporciones y funciona especificando el nombre de la imagen y el tamaño en porcentaje (usando 100 nos da el tamaño real):</p>
+
+<p><img class="center" src="/images/ejemplo-imgdim.png" title="Ejemplo de uso" ></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -244,6 +316,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/">Dimensión de las imágenes | Image dimensions</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/27/pekwm-updated-to-new-version/">PekWM: updated to new version</a>
       </li>
     
@@ -251,15 +327,11 @@
         <a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/">Blog en Github con Octopress</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Nube de Etiquetas</h1>
-    <span id="tag-cloud"><a href='/blog/categories/awk' style='font-size: 130.0%'>awk(1)</a> <a href='/blog/categories/fedora' style='font-size: 160.0%'>fedora(2)</a> <a href='/blog/categories/github' style='font-size: 130.0%'>github(1)</a> <a href='/blog/categories/kvm' style='font-size: 130.0%'>kvm(1)</a> <a href='/blog/categories/octopress' style='font-size: 130.0%'>octopress(1)</a> <a href='/blog/categories/pekwm' style='font-size: 130.0%'>pekwm(1)</a> <a href='/blog/categories/qemu' style='font-size: 130.0%'>qemu(1)</a> <a href='/blog/categories/repoquery' style='font-size: 130.0%'>repoquery(1)</a> <a href='/blog/categories/repositorio' style='font-size: 130.0%'>repositorio(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/awk' style='font-size: 120.0%'>awk(1)</a> <a href='/blog/categories/bash' style='font-size: 120.0%'>bash(1)</a> <a href='/blog/categories/fedora' style='font-size: 160.0%'>fedora(3)</a> <a href='/blog/categories/github' style='font-size: 120.0%'>github(1)</a> <a href='/blog/categories/image' style='font-size: 120.0%'>image(1)</a> <a href='/blog/categories/kvm' style='font-size: 120.0%'>kvm(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>octopress(1)</a> <a href='/blog/categories/pekwm' style='font-size: 120.0%'>pekwm(1)</a> <a href='/blog/categories/qemu' style='font-size: 120.0%'>qemu(1)</a> <a href='/blog/categories/repoquery' style='font-size: 120.0%'>repoquery(1)</a> <a href='/blog/categories/repositorio' style='font-size: 120.0%'>repositorio(1)</a> <a href='/blog/categories/script' style='font-size: 120.0%'>script(1)</a> </span>
 </section>
 <section>
 

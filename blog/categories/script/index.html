@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tamaño de un repositorio de Fedora | Size of a Fedora repository - Germán Racca Blog</title>
+  <title>Category: script - Germán Racca Blog</title>
   <meta name="author" content="Germán A. Racca">
 
   
-  <meta name="description" content="Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio /etc/yum.repos.d/fedora.repo, utilizamos &hellip;">
+  <meta name="description" content="Category: script">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">
+  <link rel="canonical" href="http://gracca.github.io/blog/categories/script/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,110 +64,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Tamaño de un repositorio de Fedora | Size of a Fedora repository</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-24T22:09:00-03:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: script</h1>
     
   </header>
-
-
-<div class="entry-content"><p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
-
-<pre><code>$ repoquery --disablerepo=\* --enablerepo=fedora -qa --qf='%{SIZE}' | awk '{sum+=$1} END{printf("Total size: %d MB\n", sum/1024/1024)}'
-  Total size: 33910 MB
-</code></pre>
-
-<p>Ese es el resultado que obtengo en mi caso usando Fedora 18. Podemos hacerlo con cualquier repositorio que aparezca en <code>/etc/yum.repos.d/</code>. Inclusive podemos poner más de uno, por ejemplo usando <code>--enablerepo=fedora,updates</code> sabremos el tamaño total de los repositorios <code>/etc/yum.repos.d/fedora.repo</code> y <code>/etc/yum.repos.d/fedora-updates.repo</code></p>
-
-<!-- more -->
-
-
-<p>El comando <a href="http://linux.die.net/man/1/repoquery">repoquery</a> (perteneciente al paquete <code>yum-utils</code>), junto con las opciones que le pusimos, nos lista los tamaños de todos los paquetes que contiene.</p>
-
-<p>El comando <a href="http://linux.die.net/man/1/awk">awk</a> en este caso va sumando todas las líneas, hasta que presentamos el valor final en megabytes (por eso la doble división al final).</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Escrito por <span class="fn">Germán A. Racca</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
+
+<article>
+  
+<h1><a href="/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/">Dimensión de las imágenes | Image dimensions</a></h1>
+<time datetime="2013-05-27T22:26:00-03:00" pubdate><span class='month'>May</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/image/'>image</a>, <a class='category' href='/blog/categories/script/'>script</a></span>
+</footer>
 
 
-<time datetime="2013-05-24T22:09:00-03:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/awk/'>awk</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/repoquery/'>repoquery</a>, <a class='category' href='/blog/categories/repositorio/'>repositorio</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/" data-via="" data-counturl="http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/03/04/inauguracion-blog-en-github-con-octopress/" title="Previous Post: Blog en Github con Octopress">&laquo; Blog en Github con Octopress</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/05/27/pekwm-updated-to-new-version/" title="Next Post: PekWM: updated to new version">PekWM: updated to new version &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -259,10 +185,7 @@
       var disqus_shortname = 'germanracca';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/';
-        var disqus_url = 'http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
