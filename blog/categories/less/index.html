@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Dimensión de las imágenes | Image dimensions - Germán Racca Blog</title>
+  <title>Category: less - Germán Racca Blog</title>
   <meta name="author" content="Germán A. Racca">
 
   
-  <meta name="description" content="La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría &hellip;">
+  <meta name="description" content="Category: less">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/">
+  <link rel="canonical" href="http://gracca.github.io/blog/categories/less/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,136 +64,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Dimensión de las imágenes | Image dimensions</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-27T22:26:00-03:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: less</h1>
     
   </header>
-
-
-<div class="entry-content"><p><img class="left" src="/images/resize-icon.png" ></p>
-
-<p>La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría la imagen con algún programa e intentaba redimensionar manteniendo las proporciones, después copiaba el nuevo tamaño y listo.</p>
-
-<!-- more -->
-
-
-<p>Para no tener que hacer todo eso cada vez que voy a poner una imagen en el blog, escribí el siguiente script de bash, el cual es muy simple y necesita de <a href="http://www.imagemagick.org">ImageMagick</a> instalado en el sistema para que funcione:</p>
-
-<figure class='code'><figcaption><span>imgdim  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Author: Germán A. Racca (skytux)</span>
-</span><span class='line'><span class="c"># E-Mail: &lt;gracca[AT]gmail[DOT]com&gt;</span>
-</span><span class='line'><span class="c"># License: GPLv3+</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">IMAGE</span><span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="nv">RATIO</span><span class="o">=</span><span class="nv">$2</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">OUT</span><span class="o">=</span><span class="k">$(</span>identify -format <span class="s2">&quot;%[fx:w*($RATIO/100)] %[fx:h*($RATIO/100)]&quot;</span> <span class="nv">$IMAGE</span><span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;$IMAGE: \033[1mwidth\033[0m and \033[1mheight\033[0m at \033[1m$RATIO%\033[0m -&gt; \033[1m$OUT\033[0m&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>El script mantiene las proporciones y funciona especificando el nombre de la imagen y el tamaño en porcentaje (usando 100 nos da el tamaño real):</p>
-
-<p><img class="center" src="/images/ejemplo-imgdim.png" title="Ejemplo de uso" ></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Escrito por <span class="fn">Germán A. Racca</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
+
+<article>
+  
+<h1><a href="/blog/2013/05/31/usando-vim-como-paginador-%7C-using-vim-as-pager/">Usando vim como paginador | Using vim as pager</a></h1>
+<time datetime="2013-05-31T10:22:00-03:00" pubdate><span class='month'>May</span> <span class='day'>31</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/bashrc/'>bashrc</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/less/'>less</a>, <a class='category' href='/blog/categories/vim/'>vim</a></span>
+</footer>
 
 
-<time datetime="2013-05-27T22:26:00-03:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/image/'>image</a>, <a class='category' href='/blog/categories/script/'>script</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/" data-via="" data-counturl="http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/05/27/pekwm-updated-to-new-version/" title="Previous Post: PekWM: updated to new version">&laquo; PekWM: updated to new version</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/" title="Next Post: Mostrar cita (fortune) sobre Linux | Show a fortune about Linux">Mostrar cita (fortune) sobre Linux | Show a fortune about Linux &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -287,10 +187,7 @@
       var disqus_shortname = 'germanracca';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/';
-        var disqus_url = 'http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
