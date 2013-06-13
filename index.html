@@ -9,7 +9,7 @@
   <meta name="author" content="Germán A. Racca">
 
   
-  <meta name="description" content="Uno de mis alias favoritos en mi ~/.bashrc es uno al cual le llamo vless y tiene las propiedades de ser un paginador (al usar less) con coloreado de &hellip;">
+  <meta name="description" content="El pasado sábado 1 de junio se llevó a cabo un Fedora Activity Day (FAD) en la Red Hat de São Paulo, organizado por Leonardo Vaz, embajador del &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/13/fad-2013-sao-paulo/">FAD 2013 - São Paulo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T18:00:00-03:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>El pasado sábado 1 de junio se llevó a cabo un <a href="https://fedoraproject.org/wiki/FAD_SP_2013">Fedora Activity Day</a> (FAD) en la <a href="http://br.redhat.com">Red Hat</a> de São Paulo, organizado por <a href="https://fedoraproject.org/wiki/User:Lvaz">Leonardo Vaz</a>, embajador del <a href="http://fedoraproject.org/es">Proyecto Fedora</a> e ingeniero de Red Hat. El objetivo principal de la reunión fue una serie de charlas, sobre las cuales voy a referirme muy brevemente a seguir.</p>
+
+<p><a href="/images/eu-fad-redhat.jpg"><img class="center" src="/images/eu-fad-redhat.jpg" width="320" height="240" title="FAD 2013 - São Paulo"></a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/06/13/fad-2013-sao-paulo/">Leer más &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -239,53 +282,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-24T22:09:00-03:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
-
-<pre><code>$ repoquery --disablerepo=\* --enablerepo=fedora -qa --qf='%{SIZE}' | awk '{sum+=$1} END{printf("Total size: %d MB\n", sum/1024/1024)}'
-  Total size: 33910 MB
-</code></pre>
-
-<p>Ese es el resultado que obtengo en mi caso usando Fedora 18. Podemos hacerlo con cualquier repositorio que aparezca en <code>/etc/yum.repos.d/</code>. Inclusive podemos poner más de uno, por ejemplo usando <code>--enablerepo=fedora,updates</code> sabremos el tamaño total de los repositorios <code>/etc/yum.repos.d/fedora.repo</code> y <code>/etc/yum.repos.d/fedora-updates.repo</code></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Leer más &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -333,6 +329,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/13/fad-2013-sao-paulo/">FAD 2013 - São Paulo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/31/usando-vim-como-paginador-%7C-using-vim-as-pager/">Usando vim como paginador | Using vim as pager</a>
       </li>
     
@@ -340,15 +340,11 @@
         <a href="/blog/2013/05/28/mostrar-cita-fortune-sobre-linux-%7C-show-a-fortune-about-linux/">Mostrar cita (fortune) sobre Linux | Show a fortune about Linux</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/">Dimensión de las imágenes | Image dimensions</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Nube de Etiquetas</h1>
-    <span id="tag-cloud"><a href='/blog/categories/awk' style='font-size: 112.0%'>awk(1)</a> <a href='/blog/categories/bash' style='font-size: 112.0%'>bash(1)</a> <a href='/blog/categories/bashrc' style='font-size: 124.0%'>bashrc(2)</a> <a href='/blog/categories/cita' style='font-size: 112.0%'>cita(1)</a> <a href='/blog/categories/fedora' style='font-size: 160.0%'>fedora(5)</a> <a href='/blog/categories/fortune' style='font-size: 112.0%'>fortune(1)</a> <a href='/blog/categories/github' style='font-size: 112.0%'>github(1)</a> <a href='/blog/categories/image' style='font-size: 112.0%'>image(1)</a> <a href='/blog/categories/kvm' style='font-size: 112.0%'>kvm(1)</a> <a href='/blog/categories/less' style='font-size: 112.0%'>less(1)</a> <a href='/blog/categories/linux' style='font-size: 112.0%'>linux(1)</a> <a href='/blog/categories/octopress' style='font-size: 112.0%'>octopress(1)</a> <a href='/blog/categories/pekwm' style='font-size: 112.0%'>pekwm(1)</a> <a href='/blog/categories/qemu' style='font-size: 112.0%'>qemu(1)</a> <a href='/blog/categories/repoquery' style='font-size: 112.0%'>repoquery(1)</a> <a href='/blog/categories/repositorio' style='font-size: 112.0%'>repositorio(1)</a> <a href='/blog/categories/script' style='font-size: 112.0%'>script(1)</a> <a href='/blog/categories/vim' style='font-size: 112.0%'>vim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/awk' style='font-size: 110.0%'>awk(1)</a> <a href='/blog/categories/bash' style='font-size: 110.0%'>bash(1)</a> <a href='/blog/categories/bashrc' style='font-size: 120.0%'>bashrc(2)</a> <a href='/blog/categories/cita' style='font-size: 110.0%'>cita(1)</a> <a href='/blog/categories/fad' style='font-size: 110.0%'>fad(1)</a> <a href='/blog/categories/fedora' style='font-size: 160.0%'>fedora(6)</a> <a href='/blog/categories/fortune' style='font-size: 110.0%'>fortune(1)</a> <a href='/blog/categories/github' style='font-size: 110.0%'>github(1)</a> <a href='/blog/categories/image' style='font-size: 110.0%'>image(1)</a> <a href='/blog/categories/kvm' style='font-size: 110.0%'>kvm(1)</a> <a href='/blog/categories/less' style='font-size: 110.0%'>less(1)</a> <a href='/blog/categories/linux' style='font-size: 110.0%'>linux(1)</a> <a href='/blog/categories/octopress' style='font-size: 110.0%'>octopress(1)</a> <a href='/blog/categories/pekwm' style='font-size: 110.0%'>pekwm(1)</a> <a href='/blog/categories/qemu' style='font-size: 110.0%'>qemu(1)</a> <a href='/blog/categories/red-hat' style='font-size: 110.0%'>red hat(1)</a> <a href='/blog/categories/repoquery' style='font-size: 110.0%'>repoquery(1)</a> <a href='/blog/categories/repositorio' style='font-size: 110.0%'>repositorio(1)</a> <a href='/blog/categories/script' style='font-size: 110.0%'>script(1)</a> <a href='/blog/categories/vim' style='font-size: 110.0%'>vim(1)</a> </span>
 </section>
 <section>
 

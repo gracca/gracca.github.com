@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fad | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/fad/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2013-06-13T19:24:14-03:00</updated>
+  <id>http://gracca.github.io/</id>
+  <author>
+    <name><![CDATA[Germán A. Racca]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[FAD 2013 - São Paulo]]></title>
+    <link href="http://gracca.github.io/blog/2013/06/13/fad-2013-sao-paulo/"/>
+    <updated>2013-06-13T18:00:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/06/13/fad-2013-sao-paulo</id>
+    <content type="html"><![CDATA[<p>El pasado sábado 1 de junio se llevó a cabo un <a href="https://fedoraproject.org/wiki/FAD_SP_2013">Fedora Activity Day</a> (FAD) en la <a href="http://br.redhat.com">Red Hat</a> de São Paulo, organizado por <a href="https://fedoraproject.org/wiki/User:Lvaz">Leonardo Vaz</a>, embajador del <a href="http://fedoraproject.org/es">Proyecto Fedora</a> e ingeniero de Red Hat. El objetivo principal de la reunión fue una serie de charlas, sobre las cuales voy a referirme muy brevemente a seguir.</p>
+
+<p><a href="http://gracca.github.io/images/eu-fad-redhat.jpg"><img class="center" src="http://gracca.github.io/images/eu-fad-redhat.jpg" width="320" height="240" title="FAD 2013 - São Paulo"></a></p>
+
+<!-- more -->
+
+
+<p>El mismo Leonardo comenzó con una charla llamada <em>"Making things happen: How to contribute to Fedora"</em>, donde nos recordó algunas de las características de Fedora: un proyecto Open Source, enfocado en el desarrollo de nuevas tecnologías, donde las contribuciones al código se hacen directamente upstream, dirigido por una comunidad de voluntarios, donde tiene su lugar la transparencia y la meritocracia. Un poco más adelante, Leo nos cuenta cómo podemos contribuir con Fedora, a saber, como Escritor de Contenidos, Diseñador, Relaciones Públicas, Desarrollador del SO, Traductor, Desarrollador Web o Administrador. Finalmente, nos habla con más detalles sobre los sub-grupos dentro del Proyecto Fedora, principalmente sobre Embajadores, Internacionalización (i18n), Empaquetadores y Pruebas (QA), donde nos explica qué tareas se realizan, cuáles son los requisitos para participar, y qué procedimientos deben llevarse a cabo para unirse a un determinado sub-grupo. Fue una charla muy provechosa y entretenida.</p>
+
+<p>La siguiente charla, llamada <em>"Contributing to Fedora and Upstream "</em>, estuvo a cargo de <a href="https://fedoraproject.org/wiki/User:Sergiodj">Sergio Durigan Jr</a>, empaquetador de Fedora y desarrollador de Red Hat, quien nos habló un poco sobre su experiencia con el <a href="http://es.wikipedia.org/wiki/GNU_Debugger">GDB</a>, sobre cómo es su día a día dentro de este proyecto, y su contribución upstream. Sergio nos hace saber que él es el mantenedor del GDB en Red Hat, y que dentro de Fedora él es co-mantenedor. Hubo mucha participación por parte del público haciendo preguntas a Sergio, quien nos brindó una charla muy informativa.</p>
+
+<p>La última charla en forma de tutorial, llamado <em>"Fedora Packaging "</em>, la dio <a href="https://fedoraproject.org/wiki/User:Itamarjp">Itamar Reis Peixoto</a>, embajador y empaquetador de Fedora. Haciendo uso del notebook de cada uno, Itamar nos muestra primero cómo crear un programa en C utilizando las herramientas <a href="http://es.wikipedia.org/wiki/GNU_build_system">Autotools</a> de <a href="http://es.wikipedia.org/wiki/Proyecto_GNU">GNU</a>, para pasar luego al empaquetamiento del mismo en el formato RPM, siguiendo los <a href="https://fedoraproject.org/wiki/How_to_create_an_RPM_package/es">lineamientos específicos de Fedora</a>. Una charla muy interactiva y técnica.</p>
+
+<p>Finalmente, quisiera agradecer a Leo por la organización y el recibimiento que nos brindó. Confieso que no conocía la Red Hat de São Paulo y realmente me sentí muy en casa mientras estuve allá. El cansancio de haber salido a las 4 de la mañana y haber llegado en casa a las 10 de la noche valió mucho la pena, no sólo por el encuentro, sino también por las grandes amistades hechas. Para finalizar, un par de fotos.</p>
+
+<p><a href="http://gracca.github.io/images/fad01.jpg"><img class="center" src="http://gracca.github.io/images/fad01.jpg" width="400" height="299" title="FAD 2013 - São Paulo"></a></p>
+
+<center>De izquierda a derecha: Sergio, Hugo, Claudio e Itamar. <em>(Click para ampliar.)</em></center>
+
+
+
+
+<br />
+
+
+<p><a href="http://gracca.github.io/images/fad02.jpg"><img class="center" src="http://gracca.github.io/images/fad02.jpg" width="400" height="299" title="FAD 2013 - São Paulo"></a></p>
+
+<center>De izquierda a derecha: Marcos y Leonardo. <em>(Click para ampliar.)</em></center>
+
+]]></content>
+  </entry>
+  
+</feed>
