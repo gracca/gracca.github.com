@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: script | Germán Racca Blog]]></title>
-  <link href="http://gracca.github.io/blog/categories/script/atom.xml" rel="self"/>
+  <title><![CDATA[Category: gtk+ 3 | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/gtk-3/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
   <updated>2013-06-27T21:12:39-03:00</updated>
   <id>http://gracca.github.io/</id>
@@ -189,61 +189,6 @@ self.add(self.button)
 </code></pre>
 
 <p>El último bloque, fuera de la clase, es muy similar al del ejemplo simple de más arriba, pero en lugar de crear una instancia de la cláse genérica <code>Gtk.Window</code>, creamos una instancia de <code>MyWindow</code>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Dimensión de las imágenes | Image dimensions]]></title>
-    <link href="http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/"/>
-    <updated>2013-05-27T22:26:00-03:00</updated>
-    <id>http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-|-image-dimensions</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/resize-icon.png" ></p>
-
-<p>La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría la imagen con algún programa e intentaba redimensionar manteniendo las proporciones, después copiaba el nuevo tamaño y listo.</p>
-
-<!-- more -->
-
-
-<p>Para no tener que hacer todo eso cada vez que voy a poner una imagen en el blog, escribí el siguiente script de bash, el cual es muy simple y necesita de <a href="http://www.imagemagick.org">ImageMagick</a> instalado en el sistema para que funcione:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>imgdim  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Author: Germán A. Racca <span class="o">(</span>skytux<span class="o">)</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;E-Mail: &amp;lt;gracca<span class="o">[</span>AT<span class="o">]</span>gmail<span class="o">[</span>DOT<span class="o">]</span>com&gt;&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;License: GPLv3+&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;IMAGE<span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="nv">RATIO</span><span class="o">=</span><span class="nv">$2</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;OUT<span class="o">=</span><span class="k">$(</span>identify -format <span class="s2">&quot;%[fx:w&lt;em&gt;($RATIO/100)] %[fx:h&lt;/em&gt;($RATIO/100)]&quot;</span> <span class="nv">$IMAGE</span><span class="k">)</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;echo -e <span class="s2">&quot;$IMAGE: \033[1mwidth\033[0m and \033[1mheight\033[0m at \033[1m$RATIO%\033[0m -&gt; \033[1m$OUT\033[0m&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>El script mantiene las proporciones y funciona especificando el nombre de la imagen y el tamaño en porcentaje (usando 100 nos da el tamaño real):</p>
-
-<p><img class="center" src="http://gracca.github.io/images/ejemplo-imgdim.png" title="Ejemplo de uso" ></p>
 ]]></content>
   </entry>
   
