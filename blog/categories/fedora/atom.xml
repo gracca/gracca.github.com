@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fedora | Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/blog/categories/fedora/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-07-03T01:42:23-03:00</updated>
+  <updated>2013-09-16T07:29:16-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python: ndarray vs. list]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/"/>
+    <updated>2013-09-15T22:22:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
+
+<p>Este fin de semana comencé a leer un libro introductorio sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>, al cual pueden verlo acá:</p>
+
+<p><a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">SciPy and NumPy (Optimizing &amp; Boosting Your Python Programming)</a></p>
+
+<p>Voy a comentar sobre un cálculo interesante que se habla en el segundo capítulo sobre la diferencia en la eficiencia computacional entre el objeto <code>list</code> y el objeto <code>ndarray</code>.</p>
+
+<!-- more -->
+
+
+<p>Las operaciones sobre los elementos de una lista sólo pueden ser hechas a través de bucles iterativos, lo cual es computacionalmente ineficiente en Python. El paquete NumPy permite superar las deficiencias de las listas de Python mediante un objeto para almacenamiento de datos llamado <code>ndarray</code>.</p>
+
+<p>Utilizando el comando mágico <code>%timeit</code> de <a href="http://ipython.org/">IPython</a>, comparamos las diferencias en velocidad de <code>ndarray</code> de NumPy versus las listas de Python al ser multiplicados por un escalar. Primero creamos un <em>array</em> que contenga 1&times;10<sup>7</sup> elementos:</p>
+
+<pre><code>In [1]: import numpy as np
+
+In [2]: arr = np.arange(1e7)
+</code></pre>
+
+<p>y luego convertimos el <em>array</em> en una lista:</p>
+
+<pre><code>In [3]: larr = arr.tolist()
+</code></pre>
+
+<p>En el caso de las listas, tenemos que crear una función para emular lo que <code>ndarray</code> puede hacer:</p>
+
+<pre><code>In [4]: def list_times(alist, scalar):
+  ....:     for i, val in enumerate(alist):
+  ....:         alist[i] = val * scalar
+  ....:     return alist
+</code></pre>
+
+<p>Ahora hacemos el cálculo en IPython con <code>%timeit</code>, primero multiplicando el <em>array</em> por 1.1:</p>
+
+<pre><code>In [5]: %timeit arr * 1.1
+10 loops, best of 3: 58.9 ms per loop
+</code></pre>
+
+<p>y luego haciendo lo mismo con la lista, usando la función creada para ello:</p>
+
+<pre><code>In [6]: %timeit list_times(larr, 1.1)
+1 loops, best of 3: 1.44 s per loop
+</code></pre>
+
+<p>Esto nos muestra que la operación con el objeto <code>ndarray</code> es ~ 25 veces más rápida que el bucle con la lista. Por lo tanto, cuando sea posible, deberemos trabajar con objetos <em>array</em> en lugar de listas.</p>
+
+<p>Interesante resultado para mí que soy un aprendiz de Python! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Introducción a GTK+ 3 en Python | Getting started with Python GTK+ 3]]></title>
@@ -282,61 +338,6 @@ $ echo "fortune linux | cowsay -f tux" &gt;&gt; .bashrc
 <p>Luego abrimos un nuevo terminal y aparecerá algo como esto:</p>
 
 <p><img class="center" src="http://gracca.github.io/images/fortune-linux.png" title="Cita (fortune)" ></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Dimensión de las imágenes | Image dimensions]]></title>
-    <link href="http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-%7C-image-dimensions/"/>
-    <updated>2013-05-27T22:26:00-03:00</updated>
-    <id>http://gracca.github.io/blog/2013/05/27/dimension-de-las-imagenes-|-image-dimensions</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/resize-icon.png" ></p>
-
-<p>La mayoría de las veces es necesario especificar la dimensión de las imágenes que se colocan en el blog. No sé como harán los demás, pero yo abría la imagen con algún programa e intentaba redimensionar manteniendo las proporciones, después copiaba el nuevo tamaño y listo.</p>
-
-<!-- more -->
-
-
-<p>Para no tener que hacer todo eso cada vez que voy a poner una imagen en el blog, escribí el siguiente script de bash, el cual es muy simple y necesita de <a href="http://www.imagemagick.org">ImageMagick</a> instalado en el sistema para que funcione:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>imgdim  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Author: Germán A. Racca <span class="o">(</span>skytux<span class="o">)</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;E-Mail: &amp;lt;gracca<span class="o">[</span>AT<span class="o">]</span>gmail<span class="o">[</span>DOT<span class="o">]</span>com&gt;&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;License: GPLv3+&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;IMAGE<span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="nv">RATIO</span><span class="o">=</span><span class="nv">$2</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;OUT<span class="o">=</span><span class="k">$(</span>identify -format <span class="s2">&quot;%[fx:w&lt;em&gt;($RATIO/100)] %[fx:h&lt;/em&gt;($RATIO/100)]&quot;</span> <span class="nv">$IMAGE</span><span class="k">)</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;echo -e <span class="s2">&quot;$IMAGE: \033[1mwidth\033[0m and \033[1mheight\033[0m at \033[1m$RATIO%\033[0m -&gt; \033[1m$OUT\033[0m&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>El script mantiene las proporciones y funciona especificando el nombre de la imagen y el tamaño en porcentaje (usando 100 nos da el tamaño real):</p>
-
-<p><img class="center" src="http://gracca.github.io/images/ejemplo-imgdim.png" title="Ejemplo de uso" ></p>
 ]]></content>
   </entry>
   

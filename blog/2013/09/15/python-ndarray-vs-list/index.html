@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: repositorio - Germán Racca Blog</title>
+  <title>Python: ndarray vs. list - Germán Racca Blog</title>
   <meta name="author" content="Germán A. Racca">
 
   
-  <meta name="description" content="Category: repositorio">
+  <meta name="description" content="Este fin de semana comencé a leer un libro introductorio sobre SciPy y NumPy, al cual pueden verlo acá: SciPy and NumPy (Optimizing &amp; Boosting &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gracca.github.io/blog/categories/repositorio/">
+  <link rel="canonical" href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,36 +64,142 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: repositorio</h1>
+    
+      <h1 class="entry-title">Python: ndarray vs. list</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-15T22:22:00-03:00" pubdate data-updated="true">Sep 15<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p><img class="left" src="/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
 
-  
-  <h2>2013</h2>
+<p>Este fin de semana comencé a leer un libro introductorio sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>, al cual pueden verlo acá:</p>
 
-<article>
-  
-<h1><a href="/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/">Tamaño de un repositorio de Fedora | Size of a Fedora repository</a></h1>
-<time datetime="2013-05-24T22:09:00-03:00" pubdate><span class='month'>May</span> <span class='day'>24</span> <span class='year'>2013</span></time>
+<p><a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">SciPy and NumPy (Optimizing &amp; Boosting Your Python Programming)</a></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/awk/'>awk</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/repoquery/'>repoquery</a>, <a class='category' href='/blog/categories/repositorio/'>repositorio</a></span>
-</footer>
+<p>Voy a comentar sobre un cálculo interesante que se habla en el segundo capítulo sobre la diferencia en la eficiencia computacional entre el objeto <code>list</code> y el objeto <code>ndarray</code>.</p>
+
+<!-- more -->
 
 
-</article>
+<p>Las operaciones sobre los elementos de una lista sólo pueden ser hechas a través de bucles iterativos, lo cual es computacionalmente ineficiente en Python. El paquete NumPy permite superar las deficiencias de las listas de Python mediante un objeto para almacenamiento de datos llamado <code>ndarray</code>.</p>
 
+<p>Utilizando el comando mágico <code>%timeit</code> de <a href="http://ipython.org/">IPython</a>, comparamos las diferencias en velocidad de <code>ndarray</code> de NumPy versus las listas de Python al ser multiplicados por un escalar. Primero creamos un <em>array</em> que contenga 1&times;10<sup>7</sup> elementos:</p>
+
+<pre><code>In [1]: import numpy as np
+
+In [2]: arr = np.arange(1e7)
+</code></pre>
+
+<p>y luego convertimos el <em>array</em> en una lista:</p>
+
+<pre><code>In [3]: larr = arr.tolist()
+</code></pre>
+
+<p>En el caso de las listas, tenemos que crear una función para emular lo que <code>ndarray</code> puede hacer:</p>
+
+<pre><code>In [4]: def list_times(alist, scalar):
+  ....:     for i, val in enumerate(alist):
+  ....:         alist[i] = val * scalar
+  ....:     return alist
+</code></pre>
+
+<p>Ahora hacemos el cálculo en IPython con <code>%timeit</code>, primero multiplicando el <em>array</em> por 1.1:</p>
+
+<pre><code>In [5]: %timeit arr * 1.1
+10 loops, best of 3: 58.9 ms per loop
+</code></pre>
+
+<p>y luego haciendo lo mismo con la lista, usando la función creada para ello:</p>
+
+<pre><code>In [6]: %timeit list_times(larr, 1.1)
+1 loops, best of 3: 1.44 s per loop
+</code></pre>
+
+<p>Esto nos muestra que la operación con el objeto <code>ndarray</code> es ~ 25 veces más rápida que el bucle con la lista. Por lo tanto, cuando sea posible, deberemos trabajar con objetos <em>array</em> en lugar de listas.</p>
+
+<p>Interesante resultado para mí que soy un aprendiz de Python! :-)</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Escrito por <span class="fn">Germán A. Racca</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-15T22:22:00-03:00" pubdate data-updated="true">Sep 15<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/ipython/'>ipython</a>, <a class='category' href='/blog/categories/numpy/'>numpy</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/scipy/'>scipy</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/" data-via="" data-counturl="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/27/introduccion-a-gtk-plus-3-en-python-%7C-getting-started-with-python-gtk-plus-3/" title="Previous Post: Introducción a GTK+ 3 en Python | Getting started with Python GTK+ 3">&laquo; Introducción a GTK+ 3 en Python | Getting started with Python GTK+ 3</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -190,7 +296,10 @@
       var disqus_shortname = 'germanracca';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/';
+        var disqus_url = 'http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

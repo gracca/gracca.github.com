@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: scipy | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/scipy/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2013-09-16T07:29:16-03:00</updated>
+  <id>http://gracca.github.io/</id>
+  <author>
+    <name><![CDATA[Germán A. Racca]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python: ndarray vs. list]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/"/>
+    <updated>2013-09-15T22:22:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
+
+<p>Este fin de semana comencé a leer un libro introductorio sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>, al cual pueden verlo acá:</p>
+
+<p><a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">SciPy and NumPy (Optimizing &amp; Boosting Your Python Programming)</a></p>
+
+<p>Voy a comentar sobre un cálculo interesante que se habla en el segundo capítulo sobre la diferencia en la eficiencia computacional entre el objeto <code>list</code> y el objeto <code>ndarray</code>.</p>
+
+<!-- more -->
+
+
+<p>Las operaciones sobre los elementos de una lista sólo pueden ser hechas a través de bucles iterativos, lo cual es computacionalmente ineficiente en Python. El paquete NumPy permite superar las deficiencias de las listas de Python mediante un objeto para almacenamiento de datos llamado <code>ndarray</code>.</p>
+
+<p>Utilizando el comando mágico <code>%timeit</code> de <a href="http://ipython.org/">IPython</a>, comparamos las diferencias en velocidad de <code>ndarray</code> de NumPy versus las listas de Python al ser multiplicados por un escalar. Primero creamos un <em>array</em> que contenga 1&times;10<sup>7</sup> elementos:</p>
+
+<pre><code>In [1]: import numpy as np
+
+In [2]: arr = np.arange(1e7)
+</code></pre>
+
+<p>y luego convertimos el <em>array</em> en una lista:</p>
+
+<pre><code>In [3]: larr = arr.tolist()
+</code></pre>
+
+<p>En el caso de las listas, tenemos que crear una función para emular lo que <code>ndarray</code> puede hacer:</p>
+
+<pre><code>In [4]: def list_times(alist, scalar):
+  ....:     for i, val in enumerate(alist):
+  ....:         alist[i] = val * scalar
+  ....:     return alist
+</code></pre>
+
+<p>Ahora hacemos el cálculo en IPython con <code>%timeit</code>, primero multiplicando el <em>array</em> por 1.1:</p>
+
+<pre><code>In [5]: %timeit arr * 1.1
+10 loops, best of 3: 58.9 ms per loop
+</code></pre>
+
+<p>y luego haciendo lo mismo con la lista, usando la función creada para ello:</p>
+
+<pre><code>In [6]: %timeit list_times(larr, 1.1)
+1 loops, best of 3: 1.44 s per loop
+</code></pre>
+
+<p>Esto nos muestra que la operación con el objeto <code>ndarray</code> es ~ 25 veces más rápida que el bucle con la lista. Por lo tanto, cuando sea posible, deberemos trabajar con objetos <em>array</em> en lugar de listas.</p>
+
+<p>Interesante resultado para mí que soy un aprendiz de Python! :-)</p>
+]]></content>
+  </entry>
+  
+</feed>
