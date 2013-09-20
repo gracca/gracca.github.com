@@ -4,7 +4,7 @@
   <title><![CDATA[Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-09-16T07:29:16-03:00</updated>
+  <updated>2013-09-20T15:47:49-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Templates: plugin para Vim]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim/"/>
+    <updated>2013-09-20T14:27:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/vim.png" width="96" height="96" title="Vim" ></p>
+
+<p>Uno de mis editores de texto preferidos es <a href="http://www.vim.org/">Vim</a>, sobre todo cuando se trata de editar archivos en consola o bien para escribir código. Y es acá donde entra en juego este plugin para Vim llamado <a href="https://github.com/aperezdc/vim-template/"><em>vim-template</em></a>, el cual nos proporciona un conjunto de plantillas para diferentes tipos de archivos.</p>
+
+<!-- more -->
+
+
+<h2>Instalación</h2>
+
+<p>Primero que nada necesitamos tener Vim, al cual lo instalamos de la siguiente manera en Fedora:</p>
+
+<pre><code>$ sudo yum install vim-enhanced
+</code></pre>
+
+<p>Luego descargamos el plugin:</p>
+
+<pre><code>$ wget https://github.com/aperezdc/vim-template/archive/master.zip
+</code></pre>
+
+<p>y lo instalamos al mismo tiempo que lo extraemos:</p>
+
+<pre><code>$ unzip -j master.zip 'vim-template-master/plugin/*' -d ~/.vim/plugin
+
+$ unzip -j master.zip 'vim-template-master/templates/*' -d ~/.vim/templates
+</code></pre>
+
+<p>De esta manera, ya tenemos instalado el plugin <em>vim-template</em> en <code>~/.vim/</code>.</p>
+
+<h2>Configuración</h2>
+
+<p>Dentro de las plantillas, se utilizan variables que van a ser expandidas según su valor. Estas variables también pueden ser sobreescritas, y es lo que voy a hacer ya que las que me interesan no toman un valor muy representativo.</p>
+
+<p>Dentro del archivo <code>~/.vimrc</code> (lo creamos si no existe) voy a colocar las sigientes líneas que tomarán un valor diferente según cada usuario:</p>
+
+<figure class='code'><figcaption><span>~/.vimrc  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">let </span>g:license <span class="o">=</span> <span class="s2">&quot;GPLv3+&quot;</span>
+</span><span class='line'><span class="nb">let </span>g:email <span class="o">=</span> <span class="s2">&quot;gracca[AT]gmail[DOT]com&quot;</span>
+</span><span class='line'><span class="nb">let </span>g:username <span class="o">=</span> <span class="s2">&quot;Germán A. Racca&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>las cuales representan la licencia del código, el email del usuario y su nombre, respectivamente.</p>
+
+<p>También voy a configurar el <em>template</em> que más uso (<code>~/.vim/templates/template.py</code>), y para ello voy a sustituir todo su contenido por lo siguiente:</p>
+
+<figure class='code'><figcaption><span>~/.vim/templates/template.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env python</span>
+</span><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># %FFILE%</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Copyright (C) %YEAR% %USER%</span>
+</span><span class='line'><span class="c"># E-Mail: &lt;%MAIL%&gt;</span>
+</span><span class='line'><span class="c"># License: %LICENSE%</span>
+</span><span class='line'>
+</span><span class='line'>%HERE%
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>De esta forma queda configurado el plugin a mi gusto. Hay plantillas para otros lenguajes de programación también, y no necesariamente tienen que ser modificados. Uno también puede crear su propio <em>template</em> para el lenguaje que más utilice y que no esté por default en el plugin.</p>
+
+<h2>Utilización</h2>
+
+<p>Podemos usar este plugin de dos maneras diferentes. Una es creando un nuevo archivo, dándole un nombre y el sufijo de interés. En este caso, para poner en práctica las configuraciones hechas anteriormente, vamos a crear un archivo Python:</p>
+
+<pre><code>$ vim foo.py
+</code></pre>
+
+<p>y cuando presionemos <em>enter</em> obtendremos lo siguiente:</p>
+
+<p><img class="center" src="http://gracca.github.io/images/vim-template-01.png" title="Template para Python" ></p>
+
+<p>Otra forma es abriendo Vim sin crear ningún archivo:</p>
+
+<pre><code>$ vim
+</code></pre>
+
+<p>y seleccionando luego el <em>template</em> desde dentro, para C en este caso:</p>
+
+<pre><code>:Template c
+</code></pre>
+
+<p>con lo cual obtendremos:</p>
+
+<p><img class="center" src="http://gracca.github.io/images/vim-template-02.png" title="Template para C" ></p>
+
+<p>Podemos ver más información y definición de variables en la página de <a href="https://github.com/aperezdc/vim-template/"><em>vim-template</em></a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python: ndarray vs. list]]></title>

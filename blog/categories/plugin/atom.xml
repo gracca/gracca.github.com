@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: vim | Germán Racca Blog]]></title>
-  <link href="http://gracca.github.io/blog/categories/vim/atom.xml" rel="self"/>
+  <title><![CDATA[Category: plugin | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/plugin/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
   <updated>2013-09-20T15:47:49-03:00</updated>
   <id>http://gracca.github.io/</id>
@@ -134,37 +134,6 @@ $ unzip -j master.zip 'vim-template-master/templates/*' -d ~/.vim/templates
 <p><img class="center" src="http://gracca.github.io/images/vim-template-02.png" title="Template para C" ></p>
 
 <p>Podemos ver más información y definición de variables en la página de <a href="https://github.com/aperezdc/vim-template/"><em>vim-template</em></a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Usando vim como paginador | Using vim as pager]]></title>
-    <link href="http://gracca.github.io/blog/2013/05/31/usando-vim-como-paginador-%7C-using-vim-as-pager/"/>
-    <updated>2013-05-31T10:22:00-03:00</updated>
-    <id>http://gracca.github.io/blog/2013/05/31/usando-vim-como-paginador-|-using-vim-as-pager</id>
-    <content type="html"><![CDATA[<p>Uno de mis alias favoritos en mi <code>~/.bashrc</code> es uno al cual le llamo <code>vless</code> y tiene las propiedades de ser un paginador (al usar <a href="http://linux.die.net/man/1/less">less</a>) con coloreado de sintaxis (al usar <a href="http://linux.die.net/man/1/vim">vim</a>).</p>
-
-<!-- more -->
-
-
-<p>Para que el alias funcione, primero tenemos que tener instalado <code>vim</code>. Si no lo tenemos, lo hacemos de la siguiente manera:</p>
-
-<pre><code>$ sudo yum install vim-enhanced
-</code></pre>
-
-<p>Luego, creamos el alias en el archivo <code>~/.bashrc</code>, abriéndolo con nuestro editor preferido y adicionando la siguiente línea:</p>
-
-<pre><code>alias vless='/usr/share/vim/vim73/macros/less.sh'
-</code></pre>
-
-<p>Guardamos los cambios, cerramos el archivo, abrimos un nuevo terminal y hacemos un test para ver si funciona correctamente:</p>
-
-<pre><code>$ vless /usr/share/vim/vim73/macros/less.sh
-</code></pre>
-
-<p>lo cual nos debería mostrar algo así:</p>
-
-<p><img class="center" src="http://gracca.github.io/images/vless.png" title="Paginando con vless" ></p>
 ]]></content>
   </entry>
   
