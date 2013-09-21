@@ -8,7 +8,7 @@ categories: [fedora, python, scipy, numpy]
 
 <img class="left" src="/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" >
 
-Ee un [post anterior](http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/) comenté que había comenzado a leer un [libro](http://books.google.com.br/books?id=-N9ZBsjW3IIC&lpg=PP1&pg=PP1#v=onepage&q&f=false) sobre [SciPy](http://www.scipy.org/) y [NumPy](http://www.numpy.org/). En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.
+En un [post anterior](http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/) comenté que había comenzado a leer un [libro](http://books.google.com.br/books?id=-N9ZBsjW3IIC&lpg=PP1&pg=PP1#v=onepage&q&f=false) sobre [SciPy](http://www.scipy.org/) y [NumPy](http://www.numpy.org/). En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.
 
 <!-- more -->
 
