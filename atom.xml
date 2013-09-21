@@ -4,7 +4,7 @@
   <title><![CDATA[Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-09-20T15:47:49-03:00</updated>
+  <updated>2013-09-21T20:33:17-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -12,6 +12,219 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dos ejemplos de SciPy | Two SciPy examples]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/"/>
+    <updated>2013-09-21T18:59:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-|-two-scipy-examples</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
+
+<p>Ee un <a href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/">post anterior</a> comenté que había comenzado a leer un <a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">libro</a> sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>. En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.</p>
+
+<!-- more -->
+
+
+<p>Como cada paso está comentado en el código, entonces no me voy a detener en las explicaciones. Es más para tener estos ejemplos como anotaciones cuando necesite hacer un cálculo simple y un gráfico modesto, nada más que eso :-)</p>
+
+<p>Si no tenemos los paquetes necesarios, en Fedora los instalamos así:</p>
+
+<pre><code># yum install numpy scipy python-matplotlib
+</code></pre>
+
+<h2>Ajuste de dos Gaussianas</h2>
+
+<p>Si usamos Vim, podemos usar el <a href="http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim/">plugin para <em>templates</em></a> del cual hablábamos ayer. Entonces creamos el archivo:</p>
+
+<pre><code>$ vim fitting-two-gaussians.py
+</code></pre>
+
+<p>y copiamos el siguiente código:</p>
+
+<figure class='code'><figcaption><span>fitting-two-gaussians.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># function to model and create data: Two-Gaussian</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c0</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> \
+</span><span class='line'>           <span class="o">+</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># clean data</span>
+</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># add noise to data</span>
+</span><span class='line'><span class="n">yn</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># fit noisy data providing guesses</span>
+</span><span class='line'><span class="n">guesses</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guesses</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># print best fit and variances (diagonal elements)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;+/-&quot;</span><span class="p">,</span> <span class="n">pcov</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;)&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># plot</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Fitting two Gaussians&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Function&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
+</span><span class='line'><span class="n">yfit</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="s">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Best Fit&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y = f(x)&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luego lo ejecutamos, pero antes le damos los permisos necesarios para ello:</p>
+
+<pre><code>$ chmod +x fitting-two-gaussians.py
+$ ./fitting-two-gaussians.py
+( 1.01566899098 +/- 0.00385041607346 )
+( 3.01416857209 +/- 0.00491510905728 )
+( 0.99386852028 +/- 0.00492078923246 )
+( -1.91566245187 +/- 0.00722572741217 )
+( 15.0208881795 +/- 0.000735898852204 )
+( 0.529428527565 +/- 0.000735896650911 )
+</code></pre>
+
+<p>Como resultado, obtenemos los seis parámetros de las dos Gaussianas y sus respectivas incertezas. El gráfico es el siguiente (<em>click</em> para ampliar):</p>
+
+<p><a href="http://gracca.github.io/images/two-gaussians.png"><img class="center" src="http://gracca.github.io/images/two-gaussians.png" width="480" height="360" title="Ajuste de dos Gaussianas"></a></p>
+
+<h2>Intersección de dos curvas</h2>
+
+<p>Siguiendo los pasos anteriores, creamos el archivo:</p>
+
+<pre><code>$ vim intersection-points.py
+</code></pre>
+
+<p>y copiamos el siguiente código:</p>
+
+<figure class='code'><figcaption><span>intersection-points.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># function to simplify intersection solution</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">findIntersection</span><span class="p">(</span><span class="n">func1</span><span class="p">,</span> <span class="n">func2</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">fsolve</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">func2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># data range</span>
+</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># functions that will intersect</span>
+</span><span class='line'><span class="n">funky</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="n">line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># starting estimate</span>
+</span><span class='line'><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># solutions on intersection points</span>
+</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">findIntersection</span><span class="p">(</span><span class="n">funky</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;, &quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;)&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># plot</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Intersection points&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">funky</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Funky func&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Line func&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="s">&#39;o&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luego lo ejecutamos, dándole sus permisos antes:</p>
+
+<pre><code>$ chmod +x intersection-points.py
+$ ./intersection-points.py
+( 13.4077307829 ,  -0.365922692171 )
+( 18.1136612829 ,  -0.318863387171 )
+( 31.7833086315 ,  -0.182166913685 )
+( 37.0799991955 ,  -0.129200008045 )
+( 39.8483778612 ,  -0.101516221388 )
+( 43.8258775032 ,  -0.0617412249676 )
+</code></pre>
+
+<p>En este caso, el resultado son los seis puntos de intersección entre las dos curvas. El gráfico es este (<em>click</em> para ampliar):</p>
+
+<p><a href="http://gracca.github.io/images/intersection.png"><img class="center" src="http://gracca.github.io/images/intersection.png" width="480" height="360" title="Intersección de dos curvas"></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Templates: plugin para Vim]]></title>
