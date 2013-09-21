@@ -4,7 +4,7 @@
   <title><![CDATA[Category: scipy | Germán Racca Blog]]></title>
   <link href="http://gracca.github.io/blog/categories/scipy/atom.xml" rel="self"/>
   <link href="http://gracca.github.io/"/>
-  <updated>2013-09-21T20:33:17-03:00</updated>
+  <updated>2013-09-21T20:44:04-03:00</updated>
   <id>http://gracca.github.io/</id>
   <author>
     <name><![CDATA[Germán A. Racca]]></name>
@@ -20,7 +20,7 @@
     <id>http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-|-two-scipy-examples</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
 
-<p>Ee un <a href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/">post anterior</a> comenté que había comenzado a leer un <a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">libro</a> sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>. En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.</p>
+<p>En un <a href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/">post anterior</a> comenté que había comenzado a leer un <a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">libro</a> sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>. En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.</p>
 
 <!-- more -->
 
