@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: awk | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/awk/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2014-01-27T12:55:31-02:00</updated>
+  <id>http://gracca.github.io/</id>
+  <author>
+    <name><![CDATA[Germán A. Racca]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tamaño de un repositorio de Fedora | Size of a Fedora repository]]></title>
+    <link href="http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-%7C-size-of-a-fedora-repository/"/>
+    <updated>2013-05-24T22:09:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/05/24/tamano-de-un-repositorio-de-fedora-|-size-of-a-fedora-repository</id>
+    <content type="html"><![CDATA[<p>Para saber el tamaño total de algún repositorio que tengamos configurado en Fedora, digamos el repositorio <code>/etc/yum.repos.d/fedora.repo</code>, utilizamos el siguiente comando:</p>
+
+<pre><code>$ repoquery --disablerepo=\* --enablerepo=fedora -qa --qf='%{SIZE}' | awk '{sum+=$1} END{printf("Total size: %d MB\n", sum/1024/1024)}'
+  Total size: 33910 MB
+</code></pre>
+
+<p>Ese es el resultado que obtengo en mi caso usando Fedora 18. Podemos hacerlo con cualquier repositorio que aparezca en <code>/etc/yum.repos.d/</code>. Inclusive podemos poner más de uno, por ejemplo usando <code>--enablerepo=fedora,updates</code> sabremos el tamaño total de los repositorios <code>/etc/yum.repos.d/fedora.repo</code> y <code>/etc/yum.repos.d/fedora-updates.repo</code></p>
+
+<!-- more -->
+
+
+<p>El comando <a href="http://linux.die.net/man/1/repoquery">repoquery</a> (perteneciente al paquete <code>yum-utils</code>), junto con las opciones que le pusimos, nos lista los tamaños de todos los paquetes que contiene.</p>
+
+<p>El comando <a href="http://linux.die.net/man/1/awk">awk</a> en este caso va sumando todas las líneas, hasta que presentamos el valor final en megabytes (por eso la doble división al final).</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fedora | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/fedora/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2014-01-27T12:55:31-02:00</updated>
+  <id>http://gracca.github.io/</id>
+  <author>
+    <name><![CDATA[Germán A. Racca]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Firefox 26: sin íconos de carpetas | missing folder icons]]></title>
+    <link href="http://gracca.github.io/blog/2014/01/27/firefox-26-sin-iconos-de-carpetas-%7C-missing-folder-icons/"/>
+    <updated>2014-01-27T11:55:00-02:00</updated>
+    <id>http://gracca.github.io/blog/2014/01/27/firefox-26-sin-iconos-de-carpetas-|-missing-folder-icons</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/firefox.png" width="96" height="96" title="Firefox" ></p>
+
+<p>El <a href="http://www.mozilla.org/es-AR/firefox/">Firefox</a> 26 me dejó de mostrar los íconos de las carpetas en los bookmarks.</p>
+
+<!-- more -->
+
+
+<p>A esto lo podemos ver en la siguiente imagen (<em>click</em> para ampliar):</p>
+
+<p><a href="http://gracca.github.io/images/firefox-sin-iconos.png"><img class="center" src="http://gracca.github.io/images/firefox-sin-iconos.png" width="450" height="253" title="Firefox sin íconos de carpetas"></a></p>
+
+<p>La solución es muy sencilla y la encontré <a href="http://forums.fedoraforum.org/showpost.php?p=1455281&amp;postcount=6">acá</a>. Se trata de agregar el siguiente código:</p>
+
+<pre><code>@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+menu.bookmark-item &gt; .menu-iconic-left {
+  visibility: visible;
+}
+</code></pre>
+
+<p>en el siguiente archivo:</p>
+
+<pre><code>~/.mozilla/firefox/&lt;profile_name&gt;/chrome/userChrome.css
+</code></pre>
+
+<p>Yo lo hice de esta forma (ejecutar la línea completa como usuario normal, sin el <code>$</code>), donde <code>&lt;profile_name&gt;</code> es el nombre del perfil de Firefox que se quiera modificar:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>bash  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> -e <span class="s1">&#39;\n@namespace url(&quot;http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul&quot;);\nmenu.bookmark-item &gt; .menu-iconic-left {\n  visibility: visible;\n}&#39;</span> &gt;&gt; ~/.mozilla/firefox/7zqzyo2f.default/chrome/userChrome.css
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Espero que le sirva a alguien. Saludos!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dos ejemplos de SciPy | Two SciPy examples]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/"/>
+    <updated>2013-09-21T18:59:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-|-two-scipy-examples</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
+
+<p>En un <a href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/">post anterior</a> comenté que había comenzado a leer un <a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">libro</a> sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>. En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.</p>
+
+<!-- more -->
+
+
+<p>Como cada paso está comentado en el código, entonces no me voy a detener en las explicaciones. Es más para tener estos ejemplos como anotaciones cuando necesite hacer un cálculo simple y un gráfico modesto, nada más que eso :-)</p>
+
+<p>Si no tenemos los paquetes necesarios, en Fedora los instalamos así:</p>
+
+<pre><code># yum install numpy scipy python-matplotlib
+</code></pre>
+
+<h2>Ajuste de dos Gaussianas</h2>
+
+<p>Si usamos Vim, podemos usar el <a href="http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim/">plugin para <em>templates</em></a> del cual hablábamos ayer. Entonces creamos el archivo:</p>
+
+<pre><code>$ vim fitting-two-gaussians.py
+</code></pre>
+
+<p>y copiamos el siguiente código:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>fitting-two-gaussians.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">function</span> <span class="n">to</span> <span class="n">model</span> <span class="ow">and</span> <span class="n">create</span> <span class="n">data</span><span class="p">:</span> <span class="n">Two</span><span class="o">-</span><span class="n">Gaussian</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c0</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> \
+</span><span class='line'>       <span class="o">+</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">clean</span> <span class="n">data</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">add</span> <span class="n">noise</span> <span class="n">to</span> <span class="n">data</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">yn</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">fit</span> <span class="n">noisy</span> <span class="n">data</span> <span class="n">providing</span> <span class="n">guesses</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">guesses</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guesses</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="k">print</span> <span class="n">best</span> <span class="n">fit</span> <span class="ow">and</span> <span class="n">variances</span> <span class="p">(</span><span class="n">diagonal</span> <span class="n">elements</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">print</span> <span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;+/-&quot;</span><span class="p">,</span> <span class="n">pcov</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;)&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">plot</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Fitting two Gaussians&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Function&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
+</span><span class='line'><span class="n">yfit</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="s">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Best Fit&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y = f(x)&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Luego lo ejecutamos, pero antes le damos los permisos necesarios para ello:</p>
+
+<pre><code>$ chmod +x fitting-two-gaussians.py
+$ ./fitting-two-gaussians.py
+( 1.01566899098 +/- 0.00385041607346 )
+( 3.01416857209 +/- 0.00491510905728 )
+( 0.99386852028 +/- 0.00492078923246 )
+( -1.91566245187 +/- 0.00722572741217 )
+( 15.0208881795 +/- 0.000735898852204 )
+( 0.529428527565 +/- 0.000735896650911 )
+</code></pre>
+
+<p>Como resultado, obtenemos los seis parámetros de las dos Gaussianas y sus respectivas incertezas. El gráfico es el siguiente (<em>click</em> para ampliar):</p>
+
+<p><a href="http://gracca.github.io/images/two-gaussians.png"><img class="center" src="http://gracca.github.io/images/two-gaussians.png" width="480" height="360" title="Ajuste de dos Gaussianas"></a></p>
+
+<h2>Intersección de dos curvas</h2>
+
+<p>Siguiendo los pasos anteriores, creamos el archivo:</p>
+
+<pre><code>$ vim intersection-points.py
+</code></pre>
+
+<p>y copiamos el siguiente código:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>intersection-points.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">function</span> <span class="n">to</span> <span class="n">simplify</span> <span class="n">intersection</span> <span class="n">solution</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">findIntersection</span><span class="p">(</span><span class="n">func1</span><span class="p">,</span> <span class="n">func2</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">fsolve</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">func2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">data</span> <span class="nb">range</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">functions</span> <span class="n">that</span> <span class="n">will</span> <span class="n">intersect</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">funky</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="n">line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">starting</span> <span class="n">estimate</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">]</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">solutions</span> <span class="n">on</span> <span class="n">intersection</span> <span class="n">points</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">result</span> <span class="o">=</span> <span class="n">findIntersection</span><span class="p">(</span><span class="n">funky</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">print</span> <span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;, &quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;)&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">plot</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Intersection points&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">funky</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Funky func&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Line func&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="s">&#39;o&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Luego lo ejecutamos, dándole sus permisos antes:</p>
+
+<pre><code>$ chmod +x intersection-points.py
+$ ./intersection-points.py
+( 13.4077307829 ,  -0.365922692171 )
+( 18.1136612829 ,  -0.318863387171 )
+( 31.7833086315 ,  -0.182166913685 )
+( 37.0799991955 ,  -0.129200008045 )
+( 39.8483778612 ,  -0.101516221388 )
+( 43.8258775032 ,  -0.0617412249676 )
+</code></pre>
+
+<p>En este caso, el resultado son los seis puntos de intersección entre las dos curvas. El gráfico es este (<em>click</em> para ampliar):</p>
+
+<p><a href="http://gracca.github.io/images/intersection.png"><img class="center" src="http://gracca.github.io/images/intersection.png" width="480" height="360" title="Intersección de dos curvas"></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Templates: plugin para Vim]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim/"/>
+    <updated>2013-09-20T14:27:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/vim.png" width="96" height="96" title="Vim" ></p>
+
+<p>Uno de mis editores de texto preferidos es <a href="http://www.vim.org/">Vim</a>, sobre todo cuando se trata de editar archivos en consola o bien para escribir código. Y es acá donde entra en juego este plugin para Vim llamado <a href="https://github.com/aperezdc/vim-template/"><em>vim-template</em></a>, el cual nos proporciona un conjunto de plantillas para diferentes tipos de archivos.</p>
+
+<!-- more -->
+
+
+<h2>Instalación</h2>
+
+<p>Primero que nada necesitamos tener Vim, al cual lo instalamos de la siguiente manera en Fedora:</p>
+
+<pre><code>$ sudo yum install vim-enhanced
+</code></pre>
+
+<p>Luego descargamos el plugin:</p>
+
+<pre><code>$ wget https://github.com/aperezdc/vim-template/archive/master.zip
+</code></pre>
+
+<p>y lo instalamos al mismo tiempo que lo extraemos:</p>
+
+<pre><code>$ unzip -j master.zip 'vim-template-master/plugin/*' -d ~/.vim/plugin
+
+$ unzip -j master.zip 'vim-template-master/templates/*' -d ~/.vim/templates
+</code></pre>
+
+<p>De esta manera, ya tenemos instalado el plugin <em>vim-template</em> en <code>~/.vim/</code>.</p>
+
+<h2>Configuración</h2>
+
+<p>Dentro de las plantillas, se utilizan variables que van a ser expandidas según su valor. Estas variables también pueden ser sobreescritas, y es lo que voy a hacer ya que las que me interesan no toman un valor muy representativo.</p>
+
+<p>Dentro del archivo <code>~/.vimrc</code> (lo creamos si no existe) voy a colocar las sigientes líneas que tomarán un valor diferente según cada usuario:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>~/.vimrc  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">let </span>g:license <span class="o">=</span> <span class="s2">&quot;GPLv3+&quot;</span>
+</span><span class='line'><span class="nb">let </span>g:email <span class="o">=</span> <span class="s2">&quot;gracca[AT]gmail[DOT]com&quot;</span>
+</span><span class='line'><span class="nb">let </span>g:username <span class="o">=</span> <span class="s2">&quot;Germán A. Racca&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>las cuales representan la licencia del código, el email del usuario y su nombre, respectivamente.</p>
+
+<p>También voy a configurar el <em>template</em> que más uso (<code>~/.vim/templates/template.py</code>), y para ello voy a sustituir todo su contenido por lo siguiente:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>~/.vim/templates/template.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/usr/bin/env python&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;-&lt;em&gt;- coding: utf-8 -&lt;/em&gt;-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;%FFILE%&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Copyright <span class="o">(</span>C<span class="o">)</span> %YEAR% %USER%&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;E-Mail: &amp;lt;%MAIL%&gt;&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;License: %LICENSE%&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;%HERE%
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>De esta forma queda configurado el plugin a mi gusto. Hay plantillas para otros lenguajes de programación también, y no necesariamente tienen que ser modificados. Uno también puede crear su propio <em>template</em> para el lenguaje que más utilice y que no esté por default en el plugin.</p>
+
+<h2>Utilización</h2>
+
+<p>Podemos usar este plugin de dos maneras diferentes. Una es creando un nuevo archivo, dándole un nombre y el sufijo de interés. En este caso, para poner en práctica las configuraciones hechas anteriormente, vamos a crear un archivo Python:</p>
+
+<pre><code>$ vim foo.py
+</code></pre>
+
+<p>y cuando presionemos <em>enter</em> obtendremos lo siguiente:</p>
+
+<p><img class="center" src="http://gracca.github.io/images/vim-template-01.png" title="Template para Python" ></p>
+
+<p>Otra forma es abriendo Vim sin crear ningún archivo:</p>
+
+<pre><code>$ vim
+</code></pre>
+
+<p>y seleccionando luego el <em>template</em> desde dentro, para C en este caso:</p>
+
+<pre><code>:Template c
+</code></pre>
+
+<p>con lo cual obtendremos:</p>
+
+<p><img class="center" src="http://gracca.github.io/images/vim-template-02.png" title="Template para C" ></p>
+
+<p>Podemos ver más información y definición de variables en la página de <a href="https://github.com/aperezdc/vim-template/"><em>vim-template</em></a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python: ndarray vs. list]]></title>
+    <link href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/"/>
+    <updated>2013-09-15T22:22:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
+
+<p>Este fin de semana comencé a leer un libro introductorio sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>, al cual pueden verlo acá:</p>
+
+<p><a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">SciPy and NumPy (Optimizing &amp; Boosting Your Python Programming)</a></p>
+
+<p>Voy a comentar sobre un cálculo interesante que se habla en el segundo capítulo sobre la diferencia en la eficiencia computacional entre el objeto <code>list</code> y el objeto <code>ndarray</code>.</p>
+
+<!-- more -->
+
+
+<p>Las operaciones sobre los elementos de una lista sólo pueden ser hechas a través de bucles iterativos, lo cual es computacionalmente ineficiente en Python. El paquete NumPy permite superar las deficiencias de las listas de Python mediante un objeto para almacenamiento de datos llamado <code>ndarray</code>.</p>
+
+<p>Utilizando el comando mágico <code>%timeit</code> de <a href="http://ipython.org/">IPython</a>, comparamos las diferencias en velocidad de <code>ndarray</code> de NumPy versus las listas de Python al ser multiplicados por un escalar. Primero creamos un <em>array</em> que contenga 1&times;10<sup>7</sup> elementos:</p>
+
+<pre><code>In [1]: import numpy as np
+
+In [2]: arr = np.arange(1e7)
+</code></pre>
+
+<p>y luego convertimos el <em>array</em> en una lista:</p>
+
+<pre><code>In [3]: larr = arr.tolist()
+</code></pre>
+
+<p>En el caso de las listas, tenemos que crear una función para emular lo que <code>ndarray</code> puede hacer:</p>
+
+<pre><code>In [4]: def list_times(alist, scalar):
+  ....:     for i, val in enumerate(alist):
+  ....:         alist[i] = val * scalar
+  ....:     return alist
+</code></pre>
+
+<p>Ahora hacemos el cálculo en IPython con <code>%timeit</code>, primero multiplicando el <em>array</em> por 1.1:</p>
+
+<pre><code>In [5]: %timeit arr * 1.1
+10 loops, best of 3: 58.9 ms per loop
+</code></pre>
+
+<p>y luego haciendo lo mismo con la lista, usando la función creada para ello:</p>
+
+<pre><code>In [6]: %timeit list_times(larr, 1.1)
+1 loops, best of 3: 1.44 s per loop
+</code></pre>
+
+<p>Esto nos muestra que la operación con el objeto <code>ndarray</code> es ~ 25 veces más rápida que el bucle con la lista. Por lo tanto, cuando sea posible, deberemos trabajar con objetos <em>array</em> en lugar de listas.</p>
+
+<p>Interesante resultado para mí que soy un aprendiz de Python! :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducción a GTK+ 3 en Python | Getting started with Python GTK+ 3]]></title>
+    <link href="http://gracca.github.io/blog/2013/06/27/introduccion-a-gtk-plus-3-en-python-%7C-getting-started-with-python-gtk-plus-3/"/>
+    <updated>2013-06-27T18:22:00-03:00</updated>
+    <id>http://gracca.github.io/blog/2013/06/27/introduccion-a-gtk-plus-3-en-python-|-getting-started-with-python-gtk-plus-3</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/python+gtk.png" width="156" height="162" title="Python & Gtk+ 3" ></p>
+
+<p>
+Esta especie de tutorial de <a href="http://live.gnome.org/PyGObject">PyGObject</a> (<a href="http://www.python.org">Python</a> y <a href="http://www.gtk.org">GTK+ 3</a>) es casi una traducción literal de su <a href="http://python-gtk-3-tutorial.readthedocs.org">documentación</a>. Más que un tutorial, es el ejemplo más simple de como crear una ventana vacía. Seguidamente, extenderemos el script para agregarle un botón que realiza una determinada acción. Se necesita un conocimiento razonable del lenguaje Python, el cual dudo en tener :-)
+</p>
+
+
+
+
+<!-- more -->
+
+
+<p>Antes de comenzar, recomiendo los siguientes documentos para que podamos aprender un poco más sobre PyGObject:</p>
+
+<ul>
+<li><p><a href="http://python-gtk-3-tutorial.readthedocs.org">http://python-gtk-3-tutorial.readthedocs.org</a></p></li>
+<li><p><a href="http://developer.gnome.org/gnome-devel-demos/stable/tutorial.py.html.en">https://developer.gnome.org/gnome-devel-demos/stable/tutorial.py.html.en</a></p></li>
+<li><p><a href="http://pfrields.fedorapeople.org/presentations/OhioLF2011/PyGObject.pdf">http://pfrields.fedorapeople.org/presentations/OhioLF2011/PyGObject.pdf</a></p></li>
+<li><p><a href="https://developer.gnome.org/gtk3/">https://developer.gnome.org/gtk3/</a></p></li>
+</ul>
+
+
+<h2>Ejemplo Simple</h2>
+
+<p>Para comenzar, crearemos el ejemplo más simple posible, el cual consiste de una ventana vacía.</p>
+
+<p><img class="center" src="http://gracca.github.io/images/pygobject_01.png" title="Ejemplo simple: ventana vacía" ></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ejemplo_simple.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="err">!</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">win</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">()</span>
+</span><span class='line'><span class="n">win</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;delete-event&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">)</span>
+</span><span class='line'><span class="n">win</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+</span><span class='line'><span class="n">Gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Explicaremos ahora cada línea del ejemplo.</p>
+
+<pre><code>#!/usr/bin/python
+</code></pre>
+
+<p>La primera línea de todos los programas en Python debe empezar con <code>#!</code> seguido del camino al intérprete Python que queremos invocar.</p>
+
+<pre><code>from gi.repository import Gtk
+</code></pre>
+
+<p>Para poder acceder a las clases y funciones de GTK+, primero debemos importar el módulo Gtk. La próxima línea crea una ventana vacía.</p>
+
+<pre><code>win = Gtk.Window()
+</code></pre>
+
+<p>Seguidamente, conectamos la ventana a su evento <em>delete</em> para asegurarnos de que la aplicación termine al cliquear en la <em>x</em> de la ventana.</p>
+
+<pre><code>win.connect("delete-event", Gtk.main_quit)
+</code></pre>
+
+<p>En el próximo paso mostramos la ventana.</p>
+
+<pre><code>win.show_all()
+</code></pre>
+
+<p>Finalmente, iniciamos el <em>loop</em> de procesamiento de GTK+, del cual saldremos cuando la ventana sea cerrada (ver línea 5).</p>
+
+<pre><code>Gtk.main()
+</code></pre>
+
+<p>Para ejecutar el programa, abrimos una terminal, cambiamos el directorio hasta donde está el archivo (al cual le llamé <em>ejemplo_simple.py</em>), y ponemos:</p>
+
+<pre><code>$ python ejemplo_simple.py
+</code></pre>
+
+<p>Alternativamente, podemos darle permisos de ejecución y luego ejecutarlo:</p>
+
+<pre><code>$ chmod +x ejemplo_simple.py
+$ ./ejemplo_simple.py
+</code></pre>
+
+<h2>Ejemplo Extendido</h2>
+
+<p>Para algo un poco más útil, aquí está la vesión en PyGObject del clásico programa <em>Hello World</em>.</p>
+
+<p><img class="center" src="http://gracca.github.io/images/pygobject_02.png" title="Ejemplo extendido: ventana + botón" ></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ejemplo_extendido.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="err">!</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">MyWindow</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">Gtk</span><span class="o">.</span><span class="n">Window</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Click Here&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_button_clicked</span><span class="p">)</span>
+</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">on_button_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Hello World&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">win</span> <span class="o">=</span> <span class="n">MyWindow</span><span class="p">()</span>
+</span><span class='line'><span class="n">win</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;delete-event&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">)</span>
+</span><span class='line'><span class="n">win</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+</span><span class='line'><span class="n">Gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>A diferencia del ejemplo simple, aquí creamos una sub-clase de <code>Gtk.Window</code> para definir nuestra propia clase <code>MyWindow</code>.</p>
+
+<pre><code>class MyWindow(Gtk.Window):
+</code></pre>
+
+<p>En el constructor de la clase, tenemos que llamar al constructor de la super-clase. Además, le diremos que dé el valor de <code>Hello World</code> a la propiedad <code>title</code>.</p>
+
+<pre><code>Gtk.Window.__init__(self, title="Hello World")
+</code></pre>
+
+<p>Las próximas tres líneas son usadas para crear un botón (<a href="http://es.wikipedia.org/wiki/Widget"><em>widget</em></a>), conectarlo a su señal <code>clicked</code>, y adicionarlo como hijo a la ventana.</p>
+
+<pre><code>self.button = Gtk.Button(label="Click Here")
+self.button.connect("clicked", self.on_button_clicked)
+self.add(self.button)
+</code></pre>
+
+<p>En consecuencia, el método <code>on_button_clicked()</code> será llamado si cliqueamos en el botón.</p>
+
+<pre><code>def on_button_clicked(self, widget):
+    print "Hello World"
+</code></pre>
+
+<p>El último bloque, fuera de la clase, es muy similar al del ejemplo simple de más arriba, pero en lugar de crear una instancia de la cláse genérica <code>Gtk.Window</code>, creamos una instancia de <code>MyWindow</code>.</p>
+]]></content>
+  </entry>
+  
+</feed>

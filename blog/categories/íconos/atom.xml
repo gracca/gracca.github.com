@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: íconos | Germán Racca Blog]]></title>
+  <link href="http://gracca.github.io/blog/categories/íconos/atom.xml" rel="self"/>
+  <link href="http://gracca.github.io/"/>
+  <updated>2014-01-27T12:55:31-02:00</updated>
+  <id>http://gracca.github.io/</id>
+  <author>
+    <name><![CDATA[Germán A. Racca]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Firefox 26: sin íconos de carpetas | missing folder icons]]></title>
+    <link href="http://gracca.github.io/blog/2014/01/27/firefox-26-sin-iconos-de-carpetas-%7C-missing-folder-icons/"/>
+    <updated>2014-01-27T11:55:00-02:00</updated>
+    <id>http://gracca.github.io/blog/2014/01/27/firefox-26-sin-iconos-de-carpetas-|-missing-folder-icons</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://gracca.github.io/images/firefox.png" width="96" height="96" title="Firefox" ></p>
+
+<p>El <a href="http://www.mozilla.org/es-AR/firefox/">Firefox</a> 26 me dejó de mostrar los íconos de las carpetas en los bookmarks.</p>
+
+<!-- more -->
+
+
+<p>A esto lo podemos ver en la siguiente imagen (<em>click</em> para ampliar):</p>
+
+<p><a href="http://gracca.github.io/images/firefox-sin-iconos.png"><img class="center" src="http://gracca.github.io/images/firefox-sin-iconos.png" width="450" height="253" title="Firefox sin íconos de carpetas"></a></p>
+
+<p>La solución es muy sencilla y la encontré <a href="http://forums.fedoraforum.org/showpost.php?p=1455281&amp;postcount=6">acá</a>. Se trata de agregar el siguiente código:</p>
+
+<pre><code>@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+menu.bookmark-item &gt; .menu-iconic-left {
+  visibility: visible;
+}
+</code></pre>
+
+<p>en el siguiente archivo:</p>
+
+<pre><code>~/.mozilla/firefox/&lt;profile_name&gt;/chrome/userChrome.css
+</code></pre>
+
+<p>Yo lo hice de esta forma (ejecutar la línea completa como usuario normal, sin el <code>$</code>), donde <code>&lt;profile_name&gt;</code> es el nombre del perfil de Firefox que se quiera modificar:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>bash  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> -e <span class="s1">&#39;\n@namespace url(&quot;http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul&quot;);\nmenu.bookmark-item &gt; .menu-iconic-left {\n  visibility: visible;\n}&#39;</span> &gt;&gt; ~/.mozilla/firefox/7zqzyo2f.default/chrome/userChrome.css
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Espero que le sirva a alguien. Saludos!</p>
+]]></content>
+  </entry>
+  
+</feed>

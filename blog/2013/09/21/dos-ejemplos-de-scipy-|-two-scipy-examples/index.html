@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dos ejemplos de SciPy | Two SciPy examples - Germán Racca Blog</title>
+  <meta name="author" content="Germán A. Racca">
+
+  
+  <meta name="description" content="En un post anterior comenté que había comenzado a leer un libro sobre SciPy y NumPy. En los primeros capítulos encontré ejemplos simples de la &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Germán Racca Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Germán Racca Blog</a></h1>
+  
+    <h2>Un blog sobre Fedora y Astrofísica</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:gracca.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archivos</a></li>
+  <li><a href="/about">Sobre</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Dos ejemplos de SciPy | Two SciPy examples</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-21T18:59:00-03:00" pubdate data-updated="true">Sep 21<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="left" src="/images/python-scipy.png" width="130.8" height="107.4" title="Numpy & Scipy" ></p>
+
+<p>En un <a href="http://gracca.github.io/blog/2013/09/15/python-ndarray-vs-list/">post anterior</a> comenté que había comenzado a leer un <a href="http://books.google.com.br/books?id=-N9ZBsjW3IIC&amp;lpg=PP1&amp;pg=PP1#v=onepage&amp;q&amp;f=false">libro</a> sobre <a href="http://www.scipy.org/">SciPy</a> y <a href="http://www.numpy.org/">NumPy</a>. En los primeros capítulos encontré ejemplos simples de la utilización de SciPy. Hoy voy a mostrar el código de dos de ellos, para los cuales implementé sus respectivos gráficos. El primero es sobre ajustar una distribución de puntos con dos Gaussianas, y el segundo es sobre encontrar los puntos de intersección de dos curvas.</p>
+
+<!-- more -->
+
+
+<p>Como cada paso está comentado en el código, entonces no me voy a detener en las explicaciones. Es más para tener estos ejemplos como anotaciones cuando necesite hacer un cálculo simple y un gráfico modesto, nada más que eso :-)</p>
+
+<p>Si no tenemos los paquetes necesarios, en Fedora los instalamos así:</p>
+
+<pre><code># yum install numpy scipy python-matplotlib
+</code></pre>
+
+<h2>Ajuste de dos Gaussianas</h2>
+
+<p>Si usamos Vim, podemos usar el <a href="http://gracca.github.io/blog/2013/09/20/templates-plugin-para-vim/">plugin para <em>templates</em></a> del cual hablábamos ayer. Entonces creamos el archivo:</p>
+
+<pre><code>$ vim fitting-two-gaussians.py
+</code></pre>
+
+<p>y copiamos el siguiente código:</p>
+
+<figure class='code'><figcaption><span>fitting-two-gaussians.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># function to model and create data: Two-Gaussian</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c0</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> \
+</span><span class='line'>           <span class="o">+</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">b1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># clean data</span>
+</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># add noise to data</span>
+</span><span class='line'><span class="n">yn</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># fit noisy data providing guesses</span>
+</span><span class='line'><span class="n">guesses</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guesses</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># print best fit and variances (diagonal elements)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;+/-&quot;</span><span class="p">,</span> <span class="n">pcov</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;)&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># plot</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Fitting two Gaussians&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Function&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
+</span><span class='line'><span class="n">yfit</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="s">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Best Fit&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y = f(x)&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luego lo ejecutamos, pero antes le damos los permisos necesarios para ello:</p>
+
+<pre><code>$ chmod +x fitting-two-gaussians.py
+$ ./fitting-two-gaussians.py
+( 1.01566899098 +/- 0.00385041607346 )
+( 3.01416857209 +/- 0.00491510905728 )
+( 0.99386852028 +/- 0.00492078923246 )
+( -1.91566245187 +/- 0.00722572741217 )
+( 15.0208881795 +/- 0.000735898852204 )
+( 0.529428527565 +/- 0.000735896650911 )
+</code></pre>
+
+<p>Como resultado, obtenemos los seis parámetros de las dos Gaussianas y sus respectivas incertezas. El gráfico es el siguiente (<em>click</em> para ampliar):</p>
+
+<p><a href="/images/two-gaussians.png"><img class="center" src="/images/two-gaussians.png" width="480" height="360" title="Ajuste de dos Gaussianas"></a></p>
+
+<h2>Intersección de dos curvas</h2>
+
+<p>Siguiendo los pasos anteriores, creamos el archivo:</p>
+
+<pre><code>$ vim intersection-points.py
+</code></pre>
+
+<p>y copiamos el siguiente código:</p>
+
+<figure class='code'><figcaption><span>intersection-points.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># function to simplify intersection solution</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">findIntersection</span><span class="p">(</span><span class="n">func1</span><span class="p">,</span> <span class="n">func2</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">fsolve</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">func2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># data range</span>
+</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># functions that will intersect</span>
+</span><span class='line'><span class="n">funky</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="n">line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># starting estimate</span>
+</span><span class='line'><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># solutions on intersection points</span>
+</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">findIntersection</span><span class="p">(</span><span class="n">funky</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;(&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;, &quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;)&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># plot</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Intersection points&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">funky</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Funky func&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Line func&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="s">&#39;o&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span class='line'><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luego lo ejecutamos, dándole sus permisos antes:</p>
+
+<pre><code>$ chmod +x intersection-points.py
+$ ./intersection-points.py
+( 13.4077307829 ,  -0.365922692171 )
+( 18.1136612829 ,  -0.318863387171 )
+( 31.7833086315 ,  -0.182166913685 )
+( 37.0799991955 ,  -0.129200008045 )
+( 39.8483778612 ,  -0.101516221388 )
+( 43.8258775032 ,  -0.0617412249676 )
+</code></pre>
+
+<p>En este caso, el resultado son los seis puntos de intersección entre las dos curvas. El gráfico es este (<em>click</em> para ampliar):</p>
+
+<p><a href="/images/intersection.png"><img class="center" src="/images/intersection.png" width="480" height="360" title="Intersección de dos curvas"></a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Escrito por <span class="fn">Germán A. Racca</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-21T18:59:00-03:00" pubdate data-updated="true">Sep 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/numpy/'>numpy</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/scipy/'>scipy</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/" data-via="" data-counturl="http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/20/templates-plugin-para-vim/" title="Previous Post: Templates: plugin para Vim">&laquo; Templates: plugin para Vim</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/27/firefox-26-sin-iconos-de-carpetas-%7C-missing-folder-icons/" title="Next Post: Firefox 26: sin íconos de carpetas | missing folder icons">Firefox 26: sin íconos de carpetas | missing folder icons &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+
+    <h1>Proyecto Fedora</h1>
+
+    <p><a href="http://fedoraproject.org/es"><img src="http://fedoraproject.org/static/images/banners/f20release.png" title="Fedora 20"></a></p>
+
+</section>
+<section>
+
+    <h1>Links Sobre Fedora</h1>
+
+    <ul>
+
+        <li><a href="http://ask.fedoraproject.org">Ask Fedora</a></li>
+
+        <li><a href="http://docs.fedoraproject.org">Fedora Docs</a></li>
+
+        <li><a href="http://forums.fedoraforum.org">Fedora Forum</a></li>
+
+        <li><a href="http://planet.fedoraproject.org">Fedora Planet</a></li>
+
+        <li><a href="http://fedorasolved.org">Fedora Solved</a></li>
+
+        <li><a href="http://admin.fedoraproject.org/pkgdb">Fedora Packages</a></li>
+
+    </ul>
+
+</section>
+<section>
+  <h1>Entradas Recientes</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/27/firefox-26-sin-iconos-de-carpetas-%7C-missing-folder-icons/">Firefox 26: sin íconos de carpetas | missing folder icons</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/">Dos ejemplos de SciPy | Two SciPy examples</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/20/templates-plugin-para-vim/">Templates: plugin para Vim</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Nube de Etiquetas</h1>
+    <span id="tag-cloud"><a href='/blog/categories/awk' style='font-size: 105.45454545454545%'>awk(1)</a> <a href='/blog/categories/bash' style='font-size: 105.45454545454545%'>bash(1)</a> <a href='/blog/categories/bashrc' style='font-size: 110.9090909090909%'>bashrc(2)</a> <a href='/blog/categories/carpetas' style='font-size: 105.45454545454545%'>carpetas(1)</a> <a href='/blog/categories/cita' style='font-size: 105.45454545454545%'>cita(1)</a> <a href='/blog/categories/fad' style='font-size: 105.45454545454545%'>fad(1)</a> <a href='/blog/categories/fedora' style='font-size: 160.0%'>fedora(11)</a> <a href='/blog/categories/firefox' style='font-size: 105.45454545454545%'>firefox(1)</a> <a href='/blog/categories/fortune' style='font-size: 105.45454545454545%'>fortune(1)</a> <a href='/blog/categories/github' style='font-size: 105.45454545454545%'>github(1)</a> <a href='/blog/categories/gtk-' style='font-size: 105.45454545454545%'>gtk+(1)</a> <a href='/blog/categories/gtk-3' style='font-size: 105.45454545454545%'>gtk+ 3(1)</a> <a href='/blog/categories/image' style='font-size: 105.45454545454545%'>image(1)</a> <a href='/blog/categories/ipython' style='font-size: 105.45454545454545%'>ipython(1)</a> <a href='/blog/categories/kvm' style='font-size: 105.45454545454545%'>kvm(1)</a> <a href='/blog/categories/less' style='font-size: 105.45454545454545%'>less(1)</a> <a href='/blog/categories/linux' style='font-size: 105.45454545454545%'>linux(1)</a> <a href='/blog/categories/numpy' style='font-size: 110.9090909090909%'>numpy(2)</a> <a href='/blog/categories/octopress' style='font-size: 105.45454545454545%'>octopress(1)</a> <a href='/blog/categories/pekwm' style='font-size: 105.45454545454545%'>pekwm(1)</a> <a href='/blog/categories/plugin' style='font-size: 105.45454545454545%'>plugin(1)</a> <a href='/blog/categories/pygobject' style='font-size: 105.45454545454545%'>pygobject(1)</a> <a href='/blog/categories/python' style='font-size: 116.36363636363636%'>python(3)</a> <a href='/blog/categories/qemu' style='font-size: 105.45454545454545%'>qemu(1)</a> <a href='/blog/categories/red-hat' style='font-size: 105.45454545454545%'>red hat(1)</a> <a href='/blog/categories/repoquery' style='font-size: 105.45454545454545%'>repoquery(1)</a> <a href='/blog/categories/repositorio' style='font-size: 105.45454545454545%'>repositorio(1)</a> <a href='/blog/categories/scipy' style='font-size: 110.9090909090909%'>scipy(2)</a> <a href='/blog/categories/script' style='font-size: 110.9090909090909%'>script(2)</a> <a href='/blog/categories/template' style='font-size: 105.45454545454545%'>template(1)</a> <a href='/blog/categories/vim' style='font-size: 110.9090909090909%'>vim(2)</a> <a href='/blog/categories/íconos' style='font-size: 105.45454545454545%'>íconos(1)</a> </span>
+</section>
+<section>
+
+  <h1>Visitantes</h1>
+
+  <p><script id="_wauwk5">var _wau = _wau || [];
+  _wau.push(["colored", "gdkdu2w897gl", "wk5", "0f6399ffffff"]);
+  (function() {var s=document.createElement("script"); s.async=true;
+  s.src="http://widgets.amung.us/colored.js";
+  document.getElementsByTagName("head")[0].appendChild(s);
+  })();</script></p>
+
+</section>
+<section>
+
+    <h1>Licencia</h1>
+
+    <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es"><img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">Licencia Creative Commons Atribución-CompartirIgual 3.0 Unported</a>.</p>
+
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Germán A. Racca -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> & <a href="http://www.vim.org">Vim</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'germanracca';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/';
+        var disqus_url = 'http://gracca.github.io/blog/2013/09/21/dos-ejemplos-de-scipy-%7C-two-scipy-examples/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
