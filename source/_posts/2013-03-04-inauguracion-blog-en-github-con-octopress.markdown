@@ -6,7 +6,8 @@ comments: true
 categories: [github, octopress] 
 ---
 
-{% img left /images/octopress_github.png 'Github + Octopress' 'Github + Octopress' %}
+ <img class="left" src="/images/octopress_github.png" title="Github + Octopress" >
+#{% img left /images/octopress_github.png 'Github + Octopress' 'Github + Octopress' %}
 
 Estoy inaugurando mi blog en [Github](http://github.com) usando [Octopress](http://octopress.org). Más adelante voy a migrar los contenidos del viejo blog en [WordPress](http://gracca.wordpress.com).
 
